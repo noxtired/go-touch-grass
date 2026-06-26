@@ -1,0 +1,87 @@
+/* ============================================================
+   Go Touch Grass — Typography
+   One utility class per named style from spec 1.2. Each maps the
+   exact font-family / size / weight / line-height / tracking.
+   ============================================================ */
+
+/* Headline Caps */
+.text-headline-caps {
+  font-family: var(--font-display);
+  font-size: var(--font-headline);   /* responsive: 40px at the design width, scales down on small screens */
+  font-style: normal;
+  font-weight: 800;
+  line-height: 0.95em; /* 95% — scales with the font-size */
+  letter-spacing: var(--tracking-title);
+  text-transform: uppercase;
+}
+
+/* Headline small */
+.text-headline-sm {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px; /* 108.333% */
+  letter-spacing: var(--tracking-title);
+}
+
+/* Body Text */
+.text-body {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 133.333% */
+  letter-spacing: var(--tracking-title);
+}
+
+/* Small Text */
+.text-small {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px; /* 133.333% */
+  letter-spacing: var(--tracking-title);
+}
+
+/* Profile Numbers */
+.text-profile-number {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 38px; /* 79.167% */
+  letter-spacing: var(--tracking-title);
+  text-transform: uppercase;
+}
+
+/* Big Numbers */
+.text-big-number {
+  font-family: var(--font-display);
+  font-size: 80px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 69px; /* 86.25% */
+  text-transform: uppercase;
+}
+
+/* Text emphasis */
+.text-emphasis {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 24px; /* 133.333% */
+  letter-spacing: var(--tracking-title);
+}
+
+/* Password Visibility */
+.text-password {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 133.333% */
+  letter-spacing: var(--tracking-title);
+}

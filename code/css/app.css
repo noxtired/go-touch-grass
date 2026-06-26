@@ -1,0 +1,403 @@
+/* ============================================================
+   Go Touch Grass — App (Todays Sidequests flow)
+   Single-page shell. Screens stack and cross-fade. Bottom bar is
+   persistent. Built only from style-guide tokens + components.
+   ============================================================ */
+
+html, body { height: 100%; }
+body { overflow: hidden; }
+
+/* make the `hidden` attribute win over component display rules */
+[hidden] { display: none !important; }
+
+/* ---------- shell ---------- */
+.app {
+  position: relative;
+  width: 100%;
+  max-width: var(--app-width);
+  height: 100dvh;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  overflow: hidden;
+}
+.app__screens { position: relative; flex: 1; min-height: 0; }
+.app__nav { position: relative; flex: none; padding: var(--space-8) var(--space-16) var(--space-16); transition: opacity .4s ease, transform .4s ease; }
+/* hide the bar during the focused onboarding screens (slides down + out) */
+.app.no-nav .app__nav { opacity: 0; transform: translateY(110%); pointer-events: none; }
+/* the bar shows during the welcome intro but stays inert through onboarding */
+.app.onboarding .bottom-bar { pointer-events: none; }
+/* soften the content edge above the bar: a cream gradient fading up to transparent
+   (so scrolling content dissolves into the background instead of a hard cut) */
+.app__nav::before {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: 100%;
+  height: 56px;
+  background: linear-gradient(180deg, rgba(250, 243, 229, 0) 0%, var(--color-bg) 100%);
+  pointer-events: none;
+}
+/* screens that manage their own bottom (camera frame, detail's pinned button) skip the fade */
+.app.no-fade .app__nav::before { display: none; }
+
+/* ---------- screens (stacked, cross-fade + slide) ---------- */
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  padding: var(--space-16) var(--space-16) var(--space-48);   /* bottom clears the bar's fade zone */
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;   /* hide the scrollbar (mobile look) so it never overlays/clips content */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity .35s ease, transform .35s ease, visibility 0s linear .35s;
+}
+.screen.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity .35s ease, transform .35s ease, visibility 0s;
+}
+/* hide scrollbars on every scroll area (WebKit) — content keeps full width, scrolls via touch/wheel */
+.screen::-webkit-scrollbar,
+.profile-scroll::-webkit-scrollbar,
+.pfp-body::-webkit-scrollbar { width: 0; height: 0; }
+/* screens that fill (no scroll) */
+.screen--camera { overflow: hidden; padding-bottom: 0; }
+
+/* keep a roomier headline→content gap on Todays Sidequests (the exception) */
+.screen--sidequests { gap: var(--space-24); }
+/* the completed headline is a bare h1 — give it the header's bottom space so the tag clears */
+.screen--completed .screen__head { padding-bottom: var(--space-8); }
+
+/* ---------- screen header ---------- */
+.screen__head { flex: none; }
+
+/* ---------- loading screen ---------- */
+.screen--loading { justify-content: center; align-items: flex-start; gap: var(--space-40); padding-bottom: var(--space-64); }
+.screen--loading__title { margin: 0; }
+.screen--loading .loading-shapes { align-self: center; }   /* shuffle icons centered */
+
+/* ===================================================================
+   FIRST-TIME ONBOARDING (welcome logo animation → name → confirm)
+   =================================================================== */
+.screen--welcome { justify-content: center; align-items: stretch; gap: var(--space-40); }
+/* the welcome text reveals after the logo, then stays as the logo leaves */
+.welcome-text { margin: 0; text-align: left; opacity: 0; max-height: 0; overflow: hidden; transition: opacity .55s ease, max-height .55s ease; }
+.welcome-logo {
+  align-self: center; width: 156px; max-height: 220px;
+  opacity: 0; transform: scale(0) rotate(-14deg);
+  transition: transform .65s cubic-bezier(.34, 1.56, .64, 1), opacity .5s ease, max-height .55s ease, margin .55s ease;
+}
+.welcome-logo img { width: 100%; display: block; }
+.screen--welcome.s1 .welcome-logo { opacity: 1; transform: scale(1) rotate(0); }      /* dynamic pop-in */
+.screen--welcome.s2 .welcome-text { opacity: 1; max-height: 40vh; }                    /* welcome text reveals */
+.screen--welcome.s3 .welcome-logo { opacity: 0; transform: scale(.3) rotate(10deg); max-height: 0; margin-top: calc(-1 * var(--space-40)); }  /* logo leaves, text re-centres */
+
+/* name + confirm — centred group, left-aligned headline */
+.screen--firstname, .screen--firstname-confirm { justify-content: center; gap: var(--space-24); }
+.firstname-title { margin: 0; }
+.firstname-actions { display: flex; gap: var(--space-16); }
+.firstname-actions > .btn { flex: 1; padding-left: 16px; padding-right: 16px; }
+
+/* ---------- todays sidequests ---------- */
+.quest-list { gap: var(--space-24); padding-top: var(--space-8); padding-bottom: var(--space-24); }
+.quest-list .quest-card { animation: gtg-card-in .45s cubic-bezier(.22,1,.36,1) backwards; }
+.quest-list .quest-card:nth-child(1) { animation-delay: .04s; }
+.quest-list .quest-card:nth-child(2) { animation-delay: .14s; }
+.quest-list .quest-card:nth-child(3) { animation-delay: .24s; }
+@keyframes gtg-card-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+/* a blocked card — and the static card on Capture Proof — are inert */
+.quest-card.is-blocked,
+.quest-card--static { pointer-events: none; }
+
+/* blocking mode: a selected card just previews the blocked (muted) look —
+   the colour change is the only indicator (no checkmark) */
+.quest-card.is-selected { color: var(--color-border-active); background: var(--cat-active); }
+/* blocking mode: cards invite a tap */
+.screen--sidequests.is-blocking .quest-card:not(.is-blocked) { cursor: pointer; }
+
+/* ---------- camera ---------- */
+.camera {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin-bottom: var(--space-16);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  background: var(--color-bg-active);
+}
+.camera__video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  background: #cfcabd;
+}
+.camera__upload { position: absolute; top: var(--space-16); right: var(--space-16); z-index: 3; }
+.camera__controls {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+  height: 88px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px;
+  background: var(--color-border);
+}
+.camera__ctrl { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 8px; background: none; border: 0; cursor: pointer; }
+.camera__ctrl img { width: 24px; height: 24px; display: block; }
+.camera__ctrl.is-on { background: rgba(250,243,229,.18); border-radius: 12px; }
+.camera__ctrl.is-disabled { opacity: .35; }     /* no second camera available */
+.camera__shutter {
+  width: 64px; height: 64px; flex: none;
+  border-radius: 50%;
+  background: var(--color-bg);
+  border: 3px solid var(--color-border);
+  box-shadow: inset 0 0 0 3px var(--color-bg), inset 0 0 0 4px var(--color-border);
+  cursor: pointer;
+  transition: transform .1s ease;
+}
+.camera__shutter:active { transform: scale(.9); }
+.camera__hint {
+  position: absolute; inset: 0 0 88px 0; z-index: 1;
+  display: grid; place-items: center; text-align: center;
+  padding: var(--space-24);
+  color: var(--color-border); font-family: var(--font-body); font-size: 12px; line-height: 16px;
+  pointer-events: none;
+}
+
+/* ---------- review (Redo / Finish) ---------- */
+.screen--review .btn-row { flex: none; padding-bottom: var(--space-16); }
+
+/* ---------- completed ---------- */
+.screen--completed .quest-overview { animation: gtg-pop-in .5s cubic-bezier(.34,1.56,.64,1) backwards; }
+@keyframes gtg-pop-in { from { opacity: 0; transform: scale(.92); } to { opacity: 1; transform: none; } }
+
+/* photo inside overview/camera */
+.quest-overview .photo img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- block confirmation popup ---------- */
+.scrim {
+  position: absolute; inset: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--space-24);
+  background: rgba(59, 56, 50, .5);          /* border black @ 50% */
+  opacity: 0; visibility: hidden;
+  transition: opacity .25s ease, visibility 0s linear .25s;
+}
+.scrim.is-open { opacity: 1; visibility: visible; transition: opacity .25s ease, visibility 0s; }
+.scrim .popup { width: 100%; max-width: 360px; transform: translateY(8px) scale(.96); transition: transform .3s cubic-bezier(.34,1.56,.64,1); }
+.scrim.is-open .popup { transform: none; }
+.popup__title { margin: 0; font-family: var(--font-display); font-size: 24px; font-weight: 700; line-height: 26px; }
+.popup__body { margin: 0; font-family: var(--font-body); font-size: 18px; font-weight: 500; line-height: 24px; }
+
+/* ===================================================================
+   PROFILE screen
+   =================================================================== */
+/* profile: the burger floats on top; everything else scrolls full-height under it */
+.screen--profile { overflow: hidden; gap: 0; padding: 0; }
+.profile-scroll {
+  flex: 1; min-height: 0; overflow-y: auto;
+  display: flex; flex-direction: column; gap: var(--space-24);
+  padding: 0 var(--space-16) var(--space-48);   /* sides + bottom (clears the bar fade) */
+  scrollbar-width: none;
+}
+/* settings button — pinned top-right, above all content */
+.profile-burger { position: absolute; top: var(--space-16); right: var(--space-16); z-index: 30; }
+/* optional attention message — sits above the card and pushes content down */
+.profile-msg { align-self: flex-start; margin-top: var(--space-16); animation: gtg-msg-in .4s cubic-bezier(.34, 1.56, .64, 1) backwards; }
+@keyframes gtg-msg-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+
+/* the avatar overlaps the card top; leave enough room that the avatar's TOP starts just
+   below the floating settings button (content still scrolls up past the burger) */
+.screen--profile .profile-card { margin-top: calc(var(--space-64) + var(--space-64) + var(--space-8)); }
+
+/* "Your Quests" section — sticks to the top of the scrolling body, edges softened */
+.profile-section-title {
+  position: sticky; top: 40px; z-index: 5;   /* stuck: heading bottom lines up with the burger's bottom (~74px) */
+  margin: var(--space-24) calc(-1 * var(--space-16)) 0;   /* full-bleed cream (covers beside the burger); top margin clears the cap pseudo */
+  padding: var(--space-8) var(--space-16);
+  background: var(--color-bg);
+}
+/* cap: extend the cream up to the top of the screen so, once the heading sticks, no
+   content peeks above the heading or to the side of the settings button when scrolling */
+.profile-section-title::before {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: 40px;
+  background: var(--color-bg); pointer-events: none;
+}
+/* fade the bottom edge so cards dissolve under it (like the bottom bar) */
+.profile-section-title::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 16px;
+  background: linear-gradient(180deg, var(--color-bg) 0%, rgba(250, 243, 229, 0) 100%);
+  pointer-events: none;
+}
+.gallery-empty { margin: var(--space-40) 0; text-align: center; font-family: var(--font-body); font-size: 18px; font-weight: 800; line-height: 24px; color: var(--color-border); }
+
+/* ===================================================================
+   QUEST OVERVIEW detail (opened from a gallery card)
+   =================================================================== */
+/* detail screens scroll as a whole — the header (back + archive/delete), card and save
+   button all scroll together. The header is NOT sticky, so it scrolls away with the
+   content (nothing overlays the card). */
+/* small room so the overview's subcategory tag (which overhangs upward) isn't clipped */
+.detail-body { padding-top: var(--space-8); }
+.screen--detail .quest-overview, .screen--set-archived-detail .quest-overview { animation: gtg-pop-in .45s cubic-bezier(.34, 1.56, .64, 1) backwards; }
+.screen--detail .quest-overview .photo img, .screen--set-archived-detail .quest-overview .photo img { width: 100%; height: 100%; object-fit: cover; }
+/* the save / restore button scrolls with the card */
+.detail-save { padding-top: var(--space-16); display: flex; justify-content: center; }
+/* a proof photo that's been deleted — fills with the quest colour */
+.photo--deleted { background: var(--cat, var(--color-bg-active)); }
+.photo-deleted { display: grid; place-items: center; text-align: center; padding: var(--space-24); font-family: var(--font-body); font-size: 12px; font-weight: 500; line-height: 16px; color: var(--color-border); }
+
+/* ===================================================================
+   SETTINGS  (overview + subpages — built from list buttons, switches,
+   radios, the pfp grid, quest cards, gallery cards & popups)
+   =================================================================== */
+.settings-list { display: flex; flex-direction: column; gap: var(--space-16); width: 100%; }
+/* inert rows (Account / About / Privacy / Terms — not built yet) */
+.list-btn--static { cursor: default; }
+.list-btn--static .list-btn__chevron { width: 24px; height: 24px; transform: rotate(180deg); }
+/* single-select rows (Title) — tap to choose, slight press */
+.list-btn--select { cursor: pointer; }
+.list-btn--select:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 0 var(--color-border); }
+.list-btn .radio { flex: none; }
+
+/* large profile avatar (Profile + Profile Picture pages) */
+.set-avatar {
+  align-self: center; flex: none;
+  width: 120px; height: 120px;
+  border: 2px solid var(--color-border);   /* outline around the circle */
+  border-radius: 50%;
+  background: var(--color-border);          /* fills the hairline so there's no gap between border and image */
+  box-shadow: 4px 4px 0 1px var(--color-border);   /* +1px spread closes the seam between the border and the shadow */
+  overflow: hidden;
+}
+.set-avatar img, .set-avatar .img-placeholder { width: 100%; height: 100%; display: block; transform: scale(1.03); }   /* slight overscan so the image meets the border (pic SVGs sit ~1% inside their box) */
+
+/* centred action button(s) at the bottom of a settings form */
+.set-actions { display: flex; justify-content: center; gap: var(--space-16); }
+
+/* Profile Picture: grid scrolls, Cancel/Save stay pinned at the bottom */
+.screen--set-pfp { overflow: hidden; }
+.pfp-body { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: var(--space-16); scrollbar-width: none;
+  margin: 0 calc(-1 * var(--space-16)); padding: 0 var(--space-16) var(--space-8); }   /* full-bleed so the list-button shadows aren't clipped; bottom room for the last shadow */
+.pfp-actions { flex: none; display: flex; gap: var(--space-16); padding-top: var(--space-16); }
+.pfp-actions > .btn { flex: 1; }
+
+/* Crop a new profile picture into a square (circular preview) */
+.screen--set-crop { overflow: hidden; }
+.crop-stage { flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-32); }
+.crop-box {
+  position: relative;
+  width: min(300px, 78vw); aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: 2px solid var(--color-border);     /* design-guideline border on the preview */
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-active);
+  touch-action: none; cursor: grab;
+}
+.crop-box:active { cursor: grabbing; }
+.crop-img { position: absolute; left: 50%; top: 50%; max-width: none; user-select: none; -webkit-user-drag: none; }
+/* circular outline + dim the square's corners outside the circle */
+.crop-ring { position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
+  box-shadow: 0 0 0 2px var(--color-border), 0 0 0 999px rgba(250, 243, 229, .55); }
+/* zoom slider — dark track, background-coloured knob (matches the switch) */
+.crop-zoom { -webkit-appearance: none; appearance: none; width: min(300px, 78vw); height: 6px; border-radius: 3px; background: var(--color-border); outline: none; }
+.crop-zoom::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--color-bg); border: 2px solid var(--color-border); cursor: pointer; }
+.crop-zoom::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: var(--color-bg); border: 2px solid var(--color-border); cursor: pointer; }
+.crop-zoom::-moz-range-track { height: 6px; border-radius: 3px; background: var(--color-border); }
+
+/* Name card: toggles between display (label + value + edit) and an edit field */
+#nameCard .field { display: none; }
+#nameCard.is-editing .field { display: flex; }
+#nameCard.is-editing .input-card__value,
+#nameCard.is-editing #btnEditName { display: none; }
+/* the save button replaces the edit button only while editing */
+#nameCard #btnSaveName { display: none; }
+#nameCard.is-editing #btnSaveName { display: inline-flex; }
+
+/* Set Title row mirrors the Name row: same label width, same small value, same spacing */
+.screen--set-profile .list-btn--nav .list-btn__label { flex: none; min-width: 104px; }
+.screen--set-profile .list-btn--nav .list-btn__value { margin-left: var(--space-8); font-size: 12px; line-height: 16px; }
+.screen--set-profile .list-btn--nav .list-btn__trailing { margin-left: auto; }
+
+/* Blocked Sidequests: count chip / select-all row */
+.blocked-head { flex: none; display: flex; justify-content: center; }
+.info-pill {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 40px; padding: var(--space-8) var(--space-24);
+  background: var(--color-bg); border: 2px solid var(--color-border); border-radius: 24px;
+  box-shadow: var(--shadow-card);
+  font-family: var(--font-body); font-size: 12px; font-weight: 500; line-height: 16px; text-align: center;
+}
+/* the blocked list re-uses the quest-card; cards are pickable only while selecting */
+.screen--set-blocked.is-selecting .quest-list .quest-card { cursor: pointer; }
+
+/* archived/gallery card whose proof image was deleted shows the subcategory shape on the card colour */
+.gallery-card__photo { display: grid; place-items: center; }
+.gallery-card__photo--shape { background: var(--cat, var(--color-bg-active)); }
+.gallery-card__shape {
+  width: 56px; height: 56px;
+  background-color: var(--color-border);
+  -webkit-mask: var(--quest-shape) center / contain no-repeat;
+          mask: var(--quest-shape) center / contain no-repeat;
+}
+
+/* ---------- shape masks for every quest subcategory (recolour via currentColor) ---------- */
+.qs-game           { --quest-shape: url("../assets/svg/shapes/game_outline.svg"); }
+.qs-activity       { --quest-shape: url("../assets/svg/shapes/activity_outline.svg"); }
+.qs-encounter      { --quest-shape: url("../assets/svg/shapes/encounter_outline.svg"); }
+.qs-discovery      { --quest-shape: url("../assets/svg/shapes/discovery_outline.svg"); }
+.qs-action         { --quest-shape: url("../assets/svg/shapes/action_outline.svg"); }
+.qs-scavenger_hunt { --quest-shape: url("../assets/svg/shapes/scavenger_hunt_outline.svg"); }
+.qs-tasks          { --quest-shape: url("../assets/svg/shapes/tasks_outline.svg"); }
+.qs-creative       { --quest-shape: url("../assets/svg/shapes/creative_outline.svg"); }
+.qs-selfcare       { --quest-shape: url("../assets/svg/shapes/selfcare_outline.svg"); }
+
+/* ===================================================================
+   LEVEL-UP / EXP screen
+   =================================================================== */
+.screen--exp { overflow: hidden; }
+/* fixed-height, centred headline so the shapes don't shift when the text changes;
+   the text cross-fades on change */
+.exp__headline {
+  margin: 0; flex: none;
+  min-height: 120px;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  transition: opacity .25s ease, transform .25s ease;
+}
+.exp__headline.is-swapping { opacity: 0; transform: translateY(-8px); }
+.exp__stage { flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-40); }
+.exp__flyicon { width: 56px; height: 56px; display: block; will-change: transform; }
+.exp__shapewrap { position: relative; flex: none; }
+.exp__level { position: absolute; left: -10px; bottom: -16px; display: flex; align-items: flex-end; line-height: 1; color: var(--color-border); pointer-events: none; }
+.exp__lvl-txt { font-family: var(--font-display); font-weight: 800; font-size: 24px; line-height: 1; padding-bottom: 8px; }
+.exp__lvl-num { font-family: var(--font-display); font-weight: 800; font-size: 80px; line-height: .8; transform-origin: left bottom; }
+/* the level number pops when a level is gained */
+.exp__lvl-num.is-pop { animation: exp-num-pop .55s cubic-bezier(.34, 1.56, .64, 1); }
+@keyframes exp-num-pop { 0% { transform: scale(1); } 45% { transform: scale(1.32); } 100% { transform: scale(1); } }
+/* the liquid rises a touch more deliberately during the level-up celebration */
+.exp__shape .level-shape__liquid { transition: height 1s cubic-bezier(.4, 0, .2, 1); }
+/* subcategory icon: jumps up, then falls into the shape, shrinking until it vanishes */
+@keyframes exp-fly {
+  0%   { transform: translateY(0) scale(1); opacity: 1; }
+  22%  { transform: translateY(-44px) scale(1.12); opacity: 1; }
+  100% { transform: translateY(124px) scale(.05); opacity: 0; }
+}
+
+/* ===================================================================
+   SUMMARY — checkmark on the proof photo
+   =================================================================== */
+.photo { position: relative; }
+.photo-check { position: absolute; right: 12px; bottom: 12px; z-index: 2; width: 52px; height: 52px; }
+.photo-check img { width: 100%; height: 100%; display: block; }
+
+/* reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .screen, .quest-list .quest-card, .screen--completed .quest-overview, .scrim .popup, .exp__flyicon,
+  .gallery-card--new, .profile-msg, .screen--detail .quest-overview { transition-duration: .01ms; animation-duration: .01ms; }
+}

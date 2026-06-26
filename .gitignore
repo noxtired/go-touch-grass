@@ -1,0 +1,7 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local Claude Code settings (machine-specific)
+.claude/settings.local.json

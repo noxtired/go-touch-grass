@@ -1,0 +1,16 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "go-touch-grass",
+      "runtimeExecutable": "powershell",
+      "runtimeArgs": [
+        "-NoProfile",
+        "-ExecutionPolicy", "Bypass",
+        "-File", "C:/Users/selly/Desktop/app/code/dev-server.ps1",
+        "-Port", "8123"
+      ],
+      "port": 8123
+    }
+  ]
+}

@@ -1,0 +1,1142 @@
+"Profile Picture"
+
+Size: 
+
+72pxx72px (SVG available in Folder)
+
+
+
+Create a boolean interaction to check and
+uncheck the profile pictures
+
+
+
+Checkmark
+
+display: flex;
+
+width: 24px;
+
+height: 24px;
+
+padding: 4px 3px 2px 3px;
+
+justify-content: center;
+
+align-items: center;
+
+aspect-ratio: 1/1;
+
+border-radius: 14.4px;
+
+border: 0.6px solid var(--border, #3B3832);
+
+background: var(--background, #FAF3E5);
+1  1                                                        1
+
+1  1                                                        1  1 Lvl.
+
+1  1                                                        1  1 Lvl.
+
+   Create a Liquid Animation that fills up the 3 different     1 Lvl.
+   shapes in the corresponding color to display level
+   progress, dynamically scalable.
+
+                                     Level Up Screen 
+
+                                                                         
+
+   Size 88px and 160px
+
+                                                 Shape
+
+                                                                         width: 160px;
+
+   Level Shapes Profile
+                                                height: 160px;
+
+   
+                                                                    aspect-ratio: 1/1;
+
+   Shape Size 88px
+                                                     
+
+   
+                                                                    "Lvl."
+
+   Text
+                                                                
+
+   display: flex;
+                                                      display: flex;
+
+   width: 88px;
+                                                        width: 37px;
+
+   height: 34px;
+                                                       height: 23px;
+
+   flex-direction: column;
+                                             flex-direction: column;
+
+   justify-content: center;
+                                            justify-content: center;
+
+   color: var(--border, #3B3832);
+                                      
+
+   Font: "Profile Numbers"
+                                              "Number"
+
+                                                                         
+
+                                                                         display: flex;
+
+                                                                         width: 160px;
+
+                                                                         height: 61.818px;
+
+                                                                         flex-direction: column;
+
+                                                                         justify-content: center;
+Button Description placeholder text                Button Description                                Button Description                                Button Description                              Your Text here|
+
+/*Text button display*/                              Your Text here|                                   Your Text here|                                   **************|                              /*Text field long*/
+
+
+
+display: flex;                                   /*Text Button edit*/                             /*Text button edit visiibility*/
+
+                /*Text button edit visiibility off*/
+
+            width: 380px;
+
+width: 380px;                                                                                                                                                                                         height: 48px;
+
+height: 80px;                                    display: flex;                                   display: flex;
+                                   display: flex;
+                                   border-radius: 24px;
+
+padding: 0 24px;                                 width: 380px;                                    width: 380px;
+                                    width: 380px;
+                                    border: 2px solid var(--border, #3B3832);
+
+justify-content: space-between;                  height: 152px;                                   height: 152px;
+                                   height: 152px;
+                                   background: var(--background, #FAF3E5);
+
+align-items: center;                             padding: 0 24px;                                 padding: 0 24px;
+                                 padding: 0 24px;
+                                 box-shadow: 4px 4px 0 0 var(--border, #3B3832);
+
+border-radius: 24px;                             justify-content: space-between;                  justify-content: space-between;
+                  justify-content: space-between;
+                   
+
+border: 2px solid var(--border, #3B3832);        align-items: center;                             align-items: center;
+                             align-items: center;
+                             /*Text*/
+
+background: var(--background, #FAF3E5);          border-radius: 24px;                             border-radius: 24px;
+                             border-radius: 24px;
+                             display: flex;
+
+box-shadow: 4px 4px 0 0 var(--border, #3B3832);  border: 2px solid var(--border, #3B3832);        border: 2px solid var(--border, #3B3832);
+        border: 2px solid var(--border, #3B3832);
+        width: 345.057px;
+
+                                                 background: var(--background, #FAF3E5);          background: var(--background, #FAF3E5);
+          background: var(--background, #FAF3E5);
+          height: 24px;
+
+/*text*/                                         box-shadow: 4px 4px 0 0 var(--border, #3B3832);  box-shadow: 4px 4px 0 0 var(--border, #3B3832);
+  box-shadow: 4px 4px 0 0 var(--border, #3B3832);
+  flex-direction: column;
+
+display: flex;                                                                                     
+                                                 
+                                                justify-content: center;
+
+width: 283px;                                    /*text*/                                         /*Button description*/
+                           /*Button description*/
+                           color: var(--border, #3B3832);
+
+height: 33px;                                    display: flex;                                   display: flex;
+                                   display: flex;
+                                   Body Text
+
+flex-direction: column;                          width: 283px;                                    width: 283px;
+                                    width: 283px;
+
+justify-content: center;                         height: 33px;                                    height: 33px;
+                                    height: 33px;
+                                    Your Text here|
+align-items: flex-start;                         flex-direction: column;                          flex-direction: column;
+                          flex-direction: column;
+
+gap: 10px;                                       justify-content: center;                         justify-content: center;
+                         justify-content: center;
+                         /*text field short*/
+
+
+flex-shrink: 0;                                  align-items: flex-start;                         align-items: flex-start;
+                         align-items: flex-start;
+
+                                                 gap: 10px;                                       gap: 10px;
+                                       gap: 10px;
+                                       width: 336px;
+
+/*button description*/                           color: var(--border, #3B3832);                   color: var(--border, #3B3832);
+                   color: var(--border, #3B3832);
+                   height: 48px;
+
+color: var(--border, #3B3832);                   Body Text                                        Body Text
+                                        Body Text
+                                        border-radius: 24px;
+
+Body Text                                                                                          
+                                                 
+                                                border: 2px solid var(--border, #3B3832);
+
+                                                                                                  /*icon*/
+                                         /*icon*/
+                                         background: var(--background, #FAF3E5);
+
+/*Placeholder text*/                             /*text field container*/                         "button small"
+                                   "button small"
+                                   box-shadow: 4px 4px 0 0 var(--border, #3B3832);
+
+display: flex;                                   width: 336px;                                    "visibility_on_black"
+                            "visibility_off_black"
+                            
+
+width: 123px;                                    height: 48px;                                    display: flex;
+                                   display: flex;
+                                   /*text*/
+
+height: 33px;                                    border-radius: 24px;                             width: 40px;
+                                     width: 40px;
+                                     display: flex;
+
+flex-direction: column;                          border: 2px solid var(--border, #3B3832);        height: 40px;
+                                    height: 40px;
+                                    width: 305.103px;
+
+justify-content: center;                         background: var(--background, #FAF3E5);          padding: 8px;
+                                    padding: 8px;
+                                    height: 24px;
+
+position: absolute;                                                                               justify-content: center;
+                         justify-content: center;
+                         flex-direction: column;
+
+right: 0;                                        /*text field text*/                              align-items: center;
+                             align-items: center;
+                             justify-content: center;
+
+top: -5px;                                       display: flex;                                                                                                                                       color: var(--border, #3B3832);
+
+color: var(--border, #3B3832);                   width: 305.103px;                                /*text field container*/                          /*text field container*/                          Body Text
+
+Small Text                                       height: 24px;                                    width: 336px;                                     width: 336px;
+                                                 flex-direction: column;                          height: 48px;                                     height: 48px;
+/*Icon*/
+                                        justify-content: center;                         border-radius: 24px;                              border-radius: 24px;
+"button small"                                   color: var(--border, #3B3832);                   border: 2px solid var(--border, #3B3832);         border: 2px solid var(--border, #3B3832);
+display: flex;                                   Body Text                                        background: var(--background, #FAF3E5);           background: var(--background, #FAF3E5);
+padding: 8px;                                                                                                                                        
+justify-content: center;                                                                          /*text field text*/                               /*text field text*/
+align-items: center;                                                                              display: flex;                                    display: flex;
+                                                                                                  width: 305.103px;                                 width: 305.103px;
+                                                                                                  height: 24px;                                     height: 24px;
+                                                                                                  flex-direction: column;                           flex-direction: column;
+                                                                                                  justify-content: center;                          justify-content: center;
+                                                                                                  color: var(--border, #3B3832);                    color: var(--border, #3B3832);
+                                                                                                  Body Text
+                                        PasswordVisibility
+              Max Mustermann                Max Mustermann
+
+                      Title                         Title
+
+Total Quests  100             Total Quests                                                                                     100
+
+                              Outside                                                                                          154
+
+                              Indoor                                                                                           102
+
+                              Social                                                                                           23
+
+              D"
+PisropflaileysCtahred"U
+ sers Name, Title, Collapse to see details of total quests in each category
+
+              Pdwirisodpftilhlae:y9P: 6ficlpetxxu;;r
+
+e
+
+              hajpuleaisgidtgnidfh-yitni-t:gec9:mo68nsppt:xexc;n;
+e
+t:ncteern;t
+ er;
+
+              baflseopxrd-esechrt--rrirnaakdti:iou0:s;1:
+ /61;4
+ px;
+
+              border: 1px solid var(--border, #3B3832);
+
+              dCiosnptlaayin:efrle
+ x;
+
+              phweaididgtdhhit:n:3g18:86074ppxpx;x;
+
+ 16px 16px 16px;
+
+              ajfulleisgxtn-ifd-yii-trecemocntsito:encn:etc:noftleleurxm;-
+ enn;
+d;
+
+              bbbgaooapcrrddk:eeg1rr6r-:opr2uaxpnd;x
+diu:ssvo:al2ird4(-vp-axbr;a(
+-c-kbgororduenrd, ,##3FBA3F833E25));;
+
+
+              Nb
+ oaxm-sehaanddowTi:tl4epCxo4nptxai0ne0r
+var(--border, #3B3832);
+
+              gafdlleaiisgxppn-:lda-8iiytpre:exmfc;le
+tsixo:;nf
+l:ecxo-slutmarnt;;
+
+
+              aF
+ olignnt-usseelfd::sEtmreptchha;s
+is for Name and Small text for title
+
+              hwL
+ ienidiegthh
+ t::314p8xp;
+x;
+
+              dTfloeistxpa-lldaQiyr:eufceletsixtos;n
+C: coonltuaminne;r
+
+
+              agallaiiggpnn: --1is6teeplmxf:;ss
+ :tfrleetxc-hs;t
+art;
+
+              Tdj
+uoissttpaifllayQy-c:uofelnesxtte;Tn
+ etx: ts
+pace-between;
+
+              aaFolliiggnnnts--:istBeelomf:dssy:tcrTeeetnxctth,e;Tr
+;e
+ xt Emphasis for numbers
+
+              
+
+
+  This is a short message to gain the              This is a short message to                           This is a short message to                       This is a short message                                     This is a short message to
+     users attention on something                  gain the users attention on                          gain the users attention on                      to gain the users                                           gain the users attention on
+                                                   something                                            something                                        attention on something                                      something
+/*Attention message*/
+
+display: flex;
+                                   /*attention message big without exclamation mark*/
+   
+                                                  Your Text here|                                           This is a short message to gain the users
+width: 240px;
+                                     
+                                                   /*attention message big with exclamation mark*/
+                                                              attention on something
+padding: 12px 24px 12px 16px;
+                    width: 380px;
+                                        
+
+justify-content: center;
+                         display: flex;
+                                      width: 380px;
+                                    Button 1  Button 2                                          Button 1  Button 2
+align-items: center;
+                             padding: 32px 24px;
+                                 display: flex;
+
+border-radius: 24px;
+                             flex-direction: column;
+                             padding: 32px 24px;
+                              /*attention big text and buttons*/
+                         /*attention big buttons*/
+
+border: 2px solid var(--border, #3B3832);
+        align-items: flex-start;
+                            flex-direction: column;
+                           
+                                                           
+
+background: var(--background, #FAF3E5);
+          gap: 16px;
+                                          align-items: flex-start;
+                         width: 380px;
+                                              width: 380px;
+
+box-shadow: 4px 4px 0 0 var(--border, #3B3832);   align-self: stretch;
+                                gap: 16px;
+                                       display: flex;
+                                             display: flex;
+
+                                                  border-radius: 24px;
+                                align-self: stretch;
+                             padding: 32px 24px;
+                                        padding: 32px 24px;
+
+  This is a short message to gain the             border: 2px solid var(--border, #3B3832);
+           border-radius: 24px;
+                             flex-direction: column;
+                                    flex-direction: column;
+
+     users attention on something                 background: var(--background, #FAF3E5);
+             border: 2px solid var(--border, #3B3832);
+        align-items: flex-start;
+                                   align-items: flex-start;
+
+                                                  box-shadow: 4px 4px 0 0 var(--border, #3B3832);
+     background: var(--background, #FAF3E5);
+          gap: 16px;
+                                                 gap: 16px;
+
+/*Attention message exclamation mark*/
+            
+                                                   box-shadow: 4px 4px 0 0 var(--border, #3B3832);
+  align-self: stretch;
+                                       align-self: stretch;
+
+display: flex;
+                                   */text*/
+                                             
+                                                 
+                                                           
+
+width: 240px;
+                                    display: flex;
+                                      */text*/
+                                         /*message text and button small*/
+                          /*exclamation mark*/
+
+padding: 12px 24px 12px 16px;
+                    flex-direction: column;
+                             display: flex;
+                                   display: flex;
+                                             width: 56px;
+
+justify-content: center;
+                         align-items: flex-start;
+                            flex-direction: column;
+                          align-items: center;
+                                       height: 56px;
+
+align-items: center;
+                             gap: 16px;
+                                          align-items: flex-start;
+                         gap: 16px;
+                                                 aspect-ratio: 1/1;
+
+border-radius: 24px;
+                             align-self: stretch;
+                                gap: 16px;
+                                       align-self: stretch;
+                                       position: absolute;
+
+border: 2px solid var(--border, #3B3832);
+        color: var(--border, #3B3832);
+                      align-self: stretch;
+                              
+                                                          right: -10.5px;
+
+background: var(--background, #FAF3E5);
+          Headline small
+                                      color: var(--border, #3B3832);
+                   /*message text*/
+                                           top: -14px;
+
+box-shadow: 4px 4px 0 0 var(--border, #3B3832);
+                                                       Headline small
+                                   align-self: stretch;
+                                       fill: var(--background, #FAF3E5);
+
+/*text*/
+                                                                                               
+                                                color: var(--border, #3B3832);
+                             stroke-width: 1.2px;
+
+flex: 1 0 0;
+                                                                                          */exclamation mark*/
+                             Headline small
+                                             stroke: var(--border, #3B3832);
+
+color: var(--border, #3B3832);
+                                                                        width: 56px;
+                                      
+                                                          filter: drop-shadow(2.4px 2.4px 0 var(--border,
+text-align: center;
+                                                                                   height: 56px;
+                                    */button small*/
+                                           #3B3832));
+
+Small Text
+                                                                                            aspect-ratio: 1/1;
+                               Button small
+                                               "exclamation_black"
+
+ 
+                                                                                                     position: absolute;
+                               
+                                                           
+
+/*exclamation mark*/
+                                                                                  right: -10.5px;
+                                  */text field*/
+                                             /*message text*/
+
+display: flex;
+                                                                                        top: -14px;
+                                      text field short
+                                           align-self: stretch;
+
+width: 40px;
+                                                                                          fill: var(--background, #FAF3E5);
+                 
+                                                          color: var(--border, #3B3832);
+
+height: 40px;
+                                                                                         stroke-width: 1.2px;
+                             /*Buttons*/
+                                                Headline small
+
+justify-content: center;
+                                                                              stroke: var(--border, #3B3832);
+                  display: flex;
+                                              
+
+align-items: center;
+                                                                                  filter: drop-shadow(2.4px 2.4px 0 var(--border,   justify-content: center;
+                                   */information text*/
+
+gap: 10px;
+                                                                                            #3B3832));
+                                       align-items: flex-start;
+                                   align-self: stretch;
+
+aspect-ratio: 1/1;
+                                                                                    "exclamationmark_black"                           gap: 16px;
+                                                 color: var(--border, #3B3832);
+
+position: absolute;
+                                                                                                                                     align-self: stretch;
+                                       Body Text
+
+right: -16px;
+                                                                                                                                           slim button
+ 
+                                               
+
+top: -16px;
+                                                                                                                                             /*note: when visibility button is pressed:
+                 /*Buttons*/
+
+border-radius: 24px;
+                                                                                                                                    button chenges svg to "visibility_off" and the text in the  display: flex;
+
+border: 1px solid var(--border, #3B3832);
+                                                                                                               text field changes to "*"'s and the style changes to        justify-content: center;
+
+background: var(--background, #FAF3E5);
+                                                                                                                 "PasswordVisibility" */                                    align-items: flex-start;
+
+box-shadow: 2px 2px 0 0 var(--border, #3B3832);
+                                                                                                                                                                     gap: 16px;
+
+                                                                                                                                                                                                                     align-self: stretch;
+
+                                                                                                                                                                                                                     slim button
+/* Switch Inactive*/
+                                Create a simple Radio Button Component
+  /*button standard default*/
+
+               /*button small default*/
+
+                           Button                               Button Description                          Button Description
+display: flex;
+                                      
+
+width: 60px;
+                                        Outer circle
+                            display: inline-flex;
+                      display: inline-flex;
+                      /* slim Button default*/
+
+                   /*button list standard default*/
+            Button Description
+padding: 8px;
+                                       width: 32px;
+                            padding: 16px;
+                             padding: 8px;
+                                                                            
+
+align-items: center;
+                                height: 32px;
+                           justify-content: center;
+                   justify-content: center;
+                   display: flex;
+                              display: flex;
+                             /*button list switch default*/
+
+gap: 10px;
+                                          
+                                        align-items: center;
+                       align-items: center;
+                       width: 182px;
+                               width: 380px;
+                               
+
+border-radius: 32px;
+                                Inner Circle
+                            border-radius: 24px;
+                       border-radius: 16px;
+                       height: 48px;
+                               height: 80px;
+                              display: flex;
+
+border: 1px solid var(--border, #3B3832);
+           width: 20px;
+                            border: 1px solid var(--border, #3B3832);
+  border: 1px solid var(--border, #3B3832);
+  padding: 16px 24px;
+                         padding: 0 24px;
+                           width: 380px;
+
+background: #FAF3E5;
+                                height: 20px;
+                           background: var(--background, #FAF3E5);
+    background: var(--background, #FAF3E5);
+    justify-content: center;
+                    justify-content: space-between;
+            height: 80px;
+
+
+                                                    aspect-ratio: 1/1;                         
+                                           
+                                          align-items: center;
+                        align-items: center;
+                       padding: 0 24px;
+
+                                                                                                /*icon*/
+                                   /*icon*/
+                                   border-radius: 24px;
+                        border-radius: 24px;
+                       justify-content: space-between;
+
+/*Circle*/
+                                                                                     width: 24px;
+                               width: 24px;
+                               border: 2px solid var(--border, #3B3832);
+   border: 2px solid var(--border, #3B3832);
+  align-items: center;
+
+                                                                                                height: 24px;
+                              height: 24px;
+                              background: var(--background, #FAF3E5);
+     background: var(--background, #FAF3E5);
+    border-radius: 24px;
+
+width: 16px;
+                                                                                  aspect-ratio: 1/1;
+                         aspect-ratio: 1/1;
+                         box-shadow: 4px 4px 0 0 var(--border,        box-shadow: 4px 4px 0 0 var(--border,       border: 2px solid var(--border, #3B3832);
+
+height: 16px;
+                                                                                 "delete_black"                              ,,delete_black"                             #3B3832);
+                                   #3B3832);
+                                  background: var(--background, #FAF3E5);
+
+flex-shrink: 0;
+                                                                                                                                                                        
+                                            
+                                          box-shadow: 4px 4px 0 0 var(--border,
+aspect-ratio: 1/1;
+                                                                                                                                                                    /*Button text*/
+                             /*button description*/
+                     #3B3832);
+
+border-radius: 64px;
+                                                                                                                                                                  color: var(--border, #3B3832);
+              color: var(--border, #3B3832);
+              
+
+background: var(--border, #3B3832);
+                                                                                                                                                    text-align: center;
+                         Body Text
+                                  /*button description*/
+
+                                                                                                                                                                                        Body text                                     
+                                          color: var(--border, #3B3832);
+
+/*Create a smoothe transition interaction on press*/                                                                                                                                                                                 /*icon*/
+                                   Body Text
+
+                                                                                                                                                                                                 Button                              width: 24px;
+                                
+
+/*Switch Active*/
+                                                                              /*button standard pressed*/
+
+               /*button small pressed*/
+                                                                height: 24px;
+                              /*icon*/
+                                      /*Bottom Bar no Gradient*/
+
+                                                                                                                                             
+                                          /* slim Button pressed*/
+
+                   flex-shrink: 0;
+                            width: 24px;
+                                  Container
+
+display: flex;
+                                                                                display: inline-flex;
+                      display: inline-flex;
+                                                                   aspect-ratio: 1/1;
+                         height: 24px;
+                                 display: flex;
+
+width: 60px;
+                                                                                  padding: 16px;
+                             padding: 8px;
+                              display: flex;
+                              "back_black"
+                               flex-shrink: 0;
+                               width: 380px;
+
+height: 32px;
+                                                                                 justify-content: center;
+                   justify-content: center;
+                   width: 182px;
+                               Transform: rotate(-180 24 24)               aspect-ratio: 1/1;
+                            height: 56px;
+
+padding: 8px 4px;
+                                                                             align-items: center;
+                       align-items: center;
+                       height: 48px;
+                                                                           "switch_off"
+                                  padding: 24px 0;
+
+justify-content: flex-end;
+                                                                    border-radius: 24px;
+                       border-radius: 16px;
+                       padding: 16px 24px;
+                          Button Description                          
+
+                                            justify-content: center;
+
+align-items: center;
+                                                                          border: 1px solid var(--border, #3B3832);
+  border: 1px solid var(--border, #3B3832);
+  justify-content: center;
+                                                                                                               align-items: center;
+
+gap: 10px;
+                                                                                    background: var(--border, #3B3832);
+        background: var(--border, #3B3832);
+        align-items: center;
+                       /*button list standard pressed*/
+            Use Radio Button and Switch Component          border-radius: 24px;
+
+border-radius: 32px;
+                                                                          box-shadow: 4px 4px 0 0 var(--border,        
+                                          border-radius: 24px;
+                        
+                                           created prior and insert them into the button  Icon Container
+
+border: 1px solid var(--border, #3B3832);
+                                                     #3B3832);
+                                  /*icon*/
+                                   border: 2px solid var(--border, #3B3832);
+  display: flex;
+                                                                             
+
+background: var(--border, #3B3832);
+                                                            
+                                          width: 24px;
+                               background: var(--border, #3B3832);
+        width: 380px;
+                                Button Description                            display: flex;
+
+
+                                                                                              /*icon*/
+                                   height: 24px;
+                               
+                                          height: 80px;
+                                                                              padding: 0 64px;
+
+/*Circle*/
+                                                                                    width: 24px;
+                               aspect-ratio: 1/1;
+                         /*Button text*/
+                            padding: 0 24px;
+                              
+                                            flex-direction: column;
+
+width: 24px;
+                                                                                  height: 24px;
+                              ,,delete_white"                             color: var(--border, #3B3832);
+             justify-content: space-between;
+              /*button list button*/
+                       align-items: center;
+
+height: 24px;
+                                                                                 aspect-ratio: 1/1;
+                                                                     text-align: center;
+                        align-items: center;
+                          
+                                            gap: 4px;
+
+flex-shrink: 0;
+                                                                               "delete_white"
+                                                                         Body text                                   border-radius: 24px;
+                         display: flex;
+                               
+
+aspect-ratio: 1/1;
+                                                                                                                                                                                                                border: 2px solid var(--border, #3B3832);
+    width: 380px;
+                                Interaction: smooth switch between the two states.
+
+border-radius: 64px;
+                                                                                                                                                                                                              background: var(--border, #3B3832);
+          height: 80px;
+                                
+
+background: var(--background, #FAF3E5);                                                                                                                                                                                              
+                                            padding: 0 24px;
+                             Create a version with a white gradient behind the bottom
+                                                                                                                                                                                                                                    /*button description*/
+                       justify-content: space-between;
+              bar used for screens with scrolling
+
+                                                                                                                                                                                                                                    color: var(--background, #FAF3E5);
+           align-items: center;
+                         background: linear-gradient(180deg, rgba(250, 243, 229,
+                                                                                                                                                                                                                                    Body Text
+                                    border-radius: 24px;
+                         0.00) 0%, var(--background, #FAF3E5) 54.33%);
+                                                                                                                                                                                                                                     
+                                            border: 2px solid var(--border, #3B3832);
+
+                                                                                                                                                                                                                                    /*icon*/
+                                     background: var(--background, #FAF3E5);
+
+                                                                                                                                                                                                                                    width: 24px;
+                                 box-shadow: 4px 4px 0 0 var(--border,
+                                                                                                                                                                                                                                    height: 24px;
+                                #3B3832);
+
+                                                                                                                                                                                                                                    flex-shrink: 0;
+                               
+
+                                                                                                                                                                                                                                    aspect-ratio: 1/1;
+                           /*button description*/
+
+                                                                                                                                                                                                                                    "back_white"
+                                 color: var(--border, #3B3832);
+
+                                                                                                                                                                                                                                    Transform: rotate(-180 24 24)                 Body Text
+
+                                                                                                                                                                                                                                                                                   
+
+                                                                                                                                                                                                                                                                                  "button small"
+
+                                                                                                                                                                                                                                                                                   
+
+                                            Subcategory                                              Subcategory                                               Subcategory                                              Subcategory                                                 Subcategory                                              Subcategory
+
+This is a short description of                           This is a short description of                           This is a short description of                            This is a short description of                              This is a short description of                           This is a short description of
+sidequest of a specific category                         sidequest of a specific category                         sidequest of a specific category                          sidequest of a specific category                            sidequest of a specific category                         sidequest of a specific category
+
+                                            Subcategory                                              Subcategory                                              Subcategory                                                                                                                                                                                 This is a short description of  This is a short description of  This is a short description of
+                                                                                                                                                                                                                                                                                                                                                          sidequest of a specific         sidequest of a specific         sidequest of a specific
+This is a short description of                           This is a short description of                           This is a short description of                                                                                                                                                                                                          category                        category                        category
+sidequest of a specific category                         sidequest of a specific category                         sidequest of a specific category
+
+"Quest Card Select"
+                                                                                                                                                                                                                                                                                                                                     This is a short description of  This is a short description of  This is a short description of
+
+                                                                                                                                                                                                                                                                                                                                                        sidequest of a specific         sidequest of a specific         sidequest of a specific
+Container:
+                                                                                                                                                                                                                                                                                                                                              category                        category                        category
+display: flex;
+
+width: 380px;
+                                                                                                                                                                              01.01.2026                                                  01.01.2026                                              01.01.2026                                                               Gallery Card
+
+
+flex-direction: column;
+
+align-items: flex-start;
+                                                                                                                                                                                              Subcategory                                                 Subcategory                                              Subcategory                                  Container
+
+gap: 24px;
+                                                                                                                                                                                                                                                                                                                                                                              display: inline-grid;
+
+
+                                                                                                                                                                          This is a short description of                              This is a short description of                           This is a short description of                                                           padding: 8px;
+
+Shape size 64x64px according to the type of each quest(9 possible)
+                                                                                                        sidequest of a specific category                            sidequest of a specific category                         sidequest of a specific category                                                         row-gap: 8px;
+
+
+                                                                                                                                                                                                                                                                                                                                                                                        column-gap: 8px;
+
+Quest Description 
+
+display: flex;
+                                                                                                                                                                                                                                                                                                                                                                          grid-template-rows: repeat(2,fit-content(100%));
+
+width: 256px;
+                                                                                                                                                                                                                                                                                                                                                                           grid-template-columns: repeat(1,fit-content(100%));
+
+height: 64px;
+
+flex-direction: column;
+                                                                                                                                                                                                                                                                                                                                                                 border-radius: 16px;
+
+justify-content: center;
+                                                                                                                                                                                                                                                                                                                                                                border: 2px solid var(--border, #3B3832);
+
+flex-shrink: 0;
+                                                                                                                                                                                                                                                                                                                                                                         background: var(--inside, #FFCE6D);
+
+Font: Body
+
+
+                                                                                                                                                                                                                                                                                                                                                                                        box-shadow: 4px 4px 0 0 var(--border, #3B3832);
+
+Subcategory Container
+
+display: flex;
+                                                                                                                                                                                                                                                                                                                                                                          
+
+width: 112px;
+                                                                                                                                                                                                                                                                                                                                                                           Photo Preview
+
+height: 32px;
+                                                                                                                                                                                                                                                                                                                                                                           width: 166px;
+
+padding: 8px 16px;
+                                                                                                                                                                                                                                                                                                                                                                      height: 166px;
+
+justify-content: center;
+                                                                                                                                                                                                                                                                                                                                                                aspect-ratio: 1/1;
+
+align-items: center;
+                                                                                                                                                                                                                                                                                                                                                                    grid-row: 1 / span 1;
+
+gap: 10px;
+                                                                                                                                                                                                                                                                                                                                                                              grid-column: 1 / span 1;
+
+
+                                                                                                                                                                                                                                                                                                                                                                                        border-radius: 8px;
+
+Subcategory Text
+
+display: flex;
+                                                                                                                                                                                                                                                                                                                                                                          border: 1px solid var(--border, #3B3832);
+
+width: 88px;
+
+height: 16px;
+                                                                                                                                                                                                                                                                                                                                                                           Automatically crop to show a square preview of the proof
+flex-direction: column;
+                                                                                                                                                                                                                                                                                                                                                                 photo
+
+justify-content: center;
+                                                                                                                                                                                                                                                                                                                                                                
+
+flex-shrink: 0;
+                                                                                                                                                                                                                                                                                                                                                                         Quest Description
+
+
+                                                                                                                                                                                                                                                                                                                                                                                        Font: Small Text
+
+color: var(--border, #3B3832);
+                                                                                                                                                                                                                                                                                                                                                          
+
+text-align: center;
+                                                                                                                                                                                                                                                                                                                                                                     Color Variation and Pressed Behaviour same as Quest
+Font: Small Text
+                                                                                                                                                                                                                                                                                                                                                                        Cards and Quest Overview
+
+
+Colors according to category of Quest ("indoor Yellow" - #FFCE6D
+
+"Outside green" - #B7DC7D
+
+"social purple" - #C892F8)
+
+
+
+When blocked or pressed the color change to "border Black active" - #87827A
+
+"background white active" -#D6CFBF
+
+"indoor Yellow active" - #FDDD9E
+
+"Outside green active" -#D2E5A7
+
+"social purple active" - #DCB9F1
+
+
+
+
+                                                                                                                                                                                      01.01.2026                                                   01.01.2026                                                01.01.2026
+
+                                                                                                                                                                                                                        Subcategory                                                 Subcategory                                              Subcategory
+
+                                                                                                                                                                            This is a short description of                              This is a short description of                           This is a short description of
+                                                                                                                                                                            sidequest of a specific category                            sidequest of a specific category                         sidequest of a specific category
+
+                                                                                                                                                                                                                        Subcategory                                                 Subcategory                                              Subcategory
+
+                                                                                                                                                                            This is a short description of                              This is a short description of                           This is a short description of
+                                                                                                                                                                            sidequest of a specific category                            sidequest of a specific category                         sidequest of a specific category
+
+                                                                                                                                                                            "Quest Overview"
+                                          Photo Container wide
+
+                                                                                                                                                                            Designed to fit Photographs of Mobile Photos 3:4 and 4:3
+  display: flex;
+
+                                                                                                                                                                            
+                                                          width: 348px;
+
+                                                                                                                                                                            Container
+                                                 height: 344px;
+
+                                                                                                                                                                            display: flex;
+                                            min-width: 89.023px;
+
+                                                                                                                                                                            width: 380px;
+                                             min-height: 88px;
+
+                                                                                                                                                                            min-height: 88px;
+                                         flex-direction: column;
+
+                                                                                                                                                                            padding: 32px 0 8px 0;
+                                    justify-content: flex-end;
+
+                                                                                                                                                                            flex-direction: column;
+                                   align-items: center;
+
+                                                                                                                                                                            align-items: center;
+                                      aspect-ratio: 87/86;
+
+                                                                                                                                                                            gap: 8px;
+                                                 border-radius: 12px;
+
+                                                                                                                                                                            
+                                                          border: 1px solid var(--border, #3B3832);
+
+                                                                                                                                                                            Photo Container long
+                                      
+
+                                                                                                                                                                            display: flex;
+                                            
+
+                                                                                                                                                                            width: 348px;
+                                             Date
+
+                                                                                                                                                                            height: 464px;
+                                            display: flex;
+
+                                                                                                                                                                            min-width: 66px;
+                                          justify-content: center;
+
+                                                                                                                                                                            min-height: 88px;
+                                         align-items: center;
+
+                                                                                                                                                                            flex-direction: column;
+                                   Font: Small Text
+
+                                                                                                                                                                            justify-content: flex-end;
+                                
+
+                                                                                                                                                                            align-items: center;
+                                      Quest Overview same as "Quest Card Select"
+
+                                                                                                                                                                            aspect-ratio: 3/4;
+
+                                                                                                                                                                            border-radius: 12px;
+                                      Create Version with and without Date
+
+                                                                                                                                                                            border: 1px solid var(--border, #3B3832);
+
+                                                                                                                                                                            
+
+HEADER Title
+
+  HEADER Title
+
+  HEADER
+  Title
+
+HEADER Title
+
+"Headers"
+
+
+
+6 different Header Variants composed of the 3 Aspects;
+Header Title, Back Arrow, Icon Button
+
+
+
+Container
+
+display: flex;
+
+width: 380px;
+
+padding: 16px 0;
+
+align-items: center;
+
+gap: 16px;
+
+
+
+Arrow
+
+24x24 px
+
+
+
+Button Component (Use button component setup prior)
+
+display: flex;
+
+padding: 16px;
+
+justify-content: center;
+
+align-items: center;
+
+
+
+Headline 
+
+Font: "Headline Caps"
+
+Width flexible
+

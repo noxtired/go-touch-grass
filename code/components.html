@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Go Touch Grass — Components</title>
+  <link rel="stylesheet" href="css/design-system.css" />
+  <style>
+    body { padding: var(--space-24) 0 var(--space-64); }
+    .top { display: flex; align-items: center; gap: var(--space-16); margin-bottom: var(--space-24); }
+    .sg-section { margin: 0 0 var(--space-40); }
+    .sg-section > h2 {
+      font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
+      font-size: 24px; line-height: 26px; margin: 0 0 var(--space-16);
+      padding-bottom: var(--space-8); border-bottom: 2px solid var(--color-border);
+    }
+    .stack > * + * { margin-top: var(--space-24); }
+    .row { display: flex; align-items: center; gap: var(--space-16); flex-wrap: wrap; }
+    .sg-label { font-family: var(--font-mono); font-size: 12px; opacity: .6; display: block; margin: 0 0 var(--space-8); }
+  </style>
+</head>
+<body>
+  <div class="gtg-stage">
+    <div class="top">
+      <a class="nav-arrow" href="style_guide.html" aria-label="Back to styleguide"><img src="assets/svg/icons/back_black.svg" alt=""></a>
+      <h1 class="text-headline-caps" style="margin:0">Components</h1>
+    </div>
+
+    <!-- HEADERS -->
+    <section class="sg-section">
+      <h2>Headers</h2>
+      <div class="stack">
+        <header class="header"><h3 class="header__title">Header Title</h3></header>
+        <header class="header">
+          <button class="nav-arrow" aria-label="Back"><img src="assets/svg/icons/back_black.svg" alt=""></button>
+          <h3 class="header__title">Header Title</h3>
+        </header>
+        <header class="header">
+          <button class="nav-arrow" aria-label="Back"><img src="assets/svg/icons/back_black.svg" alt=""></button>
+          <h3 class="header__title">Header Title</h3>
+          <button class="icon-btn" aria-label="Delete">
+            <img class="icon-btn__icon icon-btn__icon--black" src="assets/svg/icons/delete_black.svg" alt="">
+            <img class="icon-btn__icon icon-btn__icon--white" src="assets/svg/icons/delete_white.svg" alt="">
+          </button>
+        </header>
+        <header class="header">
+          <button class="nav-arrow" aria-label="Back"><img src="assets/svg/icons/back_black.svg" alt=""></button>
+          <span style="flex:1"></span>
+          <button class="icon-btn" aria-label="Delete">
+            <img class="icon-btn__icon icon-btn__icon--black" src="assets/svg/icons/delete_black.svg" alt="">
+            <img class="icon-btn__icon icon-btn__icon--white" src="assets/svg/icons/delete_white.svg" alt="">
+          </button>
+        </header>
+      </div>
+    </section>
+
+    <!-- BUTTONS -->
+    <section class="sg-section">
+      <h2>Buttons</h2>
+      <span class="sg-label">SLIM (PRESS FOR ACTIVE STATE)</span>
+      <div class="btn-row" style="margin-bottom:var(--space-16)">
+        <button class="btn">Cancel</button>
+        <button class="btn">Save</button>
+      </div>
+      <button class="btn btn--block" style="margin-bottom:var(--space-16)">Confirm</button>
+
+      <span class="sg-label">ICON — STANDARD (56) &amp; SMALL (40), PRESS TO INVERT</span>
+      <div class="row">
+        <button class="icon-btn" aria-label="Back">
+          <img class="icon-btn__icon icon-btn__icon--black" src="assets/svg/icons/back_black.svg" alt="">
+          <img class="icon-btn__icon icon-btn__icon--white" src="assets/svg/icons/back_white.svg" alt="">
+        </button>
+        <button class="icon-btn" aria-label="Block">
+          <img class="icon-btn__icon icon-btn__icon--black" src="assets/svg/icons/block_black.svg" alt="">
+          <img class="icon-btn__icon icon-btn__icon--white" src="assets/svg/icons/block_white.svg" alt="">
+        </button>
+        <button class="icon-btn" aria-label="Menu">
+          <img class="icon-btn__icon icon-btn__icon--black" src="assets/svg/icons/burger_black.svg" alt="">
+          <img class="icon-btn__icon icon-btn__icon--white" src="assets/svg/icons/burger_white.svg" alt="">
+        </button>
+        <button class="icon-btn-sm" aria-label="Edit">
+          <img class="icon-btn__icon icon-btn__icon--black" src="assets/svg/icons/edit_black.svg" alt="">
+          <img class="icon-btn__icon icon-btn__icon--white" src="assets/svg/icons/edit_white.svg" alt="">
+        </button>
+        <button class="icon-btn-sm" aria-label="Upload">
+          <img class="icon-btn__icon icon-btn__icon--black" src="assets/svg/icons/upload_black.svg" alt="">
+          <img class="icon-btn__icon icon-btn__icon--white" src="assets/svg/icons/upload_white.svg" alt="">
+        </button>
+      </div>
+    </section>
+
+    <!-- LIST BUTTONS -->
+    <section class="sg-section">
+      <h2>List buttons</h2>
+      <div class="stack">
+        <button class="list-btn list-btn--nav">
+          <span class="list-btn__label">Profile</span>
+          <span class="list-btn__trailing">
+            <img class="list-btn__chevron list-btn__chevron--black" src="assets/svg/icons/back_black.svg" alt="">
+            <img class="list-btn__chevron list-btn__chevron--white" src="assets/svg/icons/back_white.svg" alt="">
+          </span>
+        </button>
+        <div class="list-btn">
+          <span class="list-btn__label">Push Notifications</span>
+          <span class="list-btn__trailing"><button class="switch" aria-checked="false"></button></span>
+        </div>
+        <div class="list-btn">
+          <span class="list-btn__label">Delete Account</span>
+          <span class="list-btn__trailing">
+            <button class="icon-btn-sm" aria-label="Delete">
+              <img class="icon-btn__icon icon-btn__icon--black" src="assets/svg/icons/delete_black.svg" alt="">
+              <img class="icon-btn__icon icon-btn__icon--white" src="assets/svg/icons/delete_white.svg" alt="">
+            </button>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEXT FIELDS -->
+    <section class="sg-section">
+      <h2>Text fields</h2>
+      <div class="stack">
+        <input class="field" placeholder="Your Text here" />
+        <div class="input-card input-card--display">
+          <div class="input-card__top">
+            <span class="input-card__label">Email</span>
+            <span class="input-card__value">placeholder text</span>
+            <button class="icon-btn-sm" aria-label="Edit">
+              <img class="icon-btn__icon icon-btn__icon--black" src="assets/svg/icons/edit_black.svg" alt="">
+              <img class="icon-btn__icon icon-btn__icon--white" src="assets/svg/icons/edit_white.svg" alt="">
+            </button>
+          </div>
+        </div>
+        <div class="input-card">
+          <div class="input-card__top">
+            <span class="input-card__label">Name</span>
+            <button class="icon-btn-sm" aria-label="Edit">
+              <img class="icon-btn__icon icon-btn__icon--black" src="assets/svg/icons/edit_black.svg" alt="">
+              <img class="icon-btn__icon icon-btn__icon--white" src="assets/svg/icons/edit_white.svg" alt="">
+            </button>
+          </div>
+          <input class="field field--flush" placeholder="Your Text here" />
+        </div>
+        <div class="input-card" data-visibility>
+          <div class="input-card__top">
+            <span class="input-card__label">Password</span>
+            <button class="icon-btn-sm" data-visibility-toggle aria-label="Toggle visibility">
+              <img class="icon-btn__icon icon-btn__icon--black" src="assets/svg/icons/visibility_off_black.svg"
+                   data-off="assets/svg/icons/visibility_off_black.svg" data-on="assets/svg/icons/visibility_on_black.svg" alt="">
+              <img class="icon-btn__icon icon-btn__icon--white" src="assets/svg/icons/visibility_off_white.svg"
+                   data-off="assets/svg/icons/visibility_off_white.svg" data-on="assets/svg/icons/visibility_on_white.svg" alt="">
+            </button>
+          </div>
+          <input class="field field--flush is-masked" type="text" value="grasstoucher" />
+        </div>
+      </div>
+    </section>
+
+    <!-- TOGGLES / RADIOS -->
+    <section class="sg-section">
+      <h2>Switch &amp; radio</h2>
+      <span class="sg-label">SWITCH (CLICK TO TOGGLE)</span>
+      <div class="row" style="margin-bottom:var(--space-16)">
+        <button class="switch" aria-checked="false"></button>
+        <button class="switch" aria-checked="true"></button>
+      </div>
+      <span class="sg-label">RADIO (SINGLE SELECT)</span>
+      <div class="row" data-radio-group>
+        <button class="radio" aria-checked="true"></button>
+        <button class="radio" aria-checked="false"></button>
+        <button class="radio" aria-checked="false"></button>
+      </div>
+    </section>
+
+    <!-- PROFILE PICTURE SELECTOR -->
+    <section class="sg-section">
+      <h2>Profile picture</h2>
+      <span class="sg-label">CLICK TO SELECT / DESELECT</span>
+      <div class="pfp-grid" data-pfp-group>
+        <button class="pfp" aria-pressed="true"><img src="assets/svg/profile-pics/outside_pic.svg" alt="Outside"><img class="pfp__check" src="assets/svg/checkmark.svg" alt=""></button>
+        <button class="pfp"><img src="assets/svg/profile-pics/creative_pic.svg" alt="Creative"><img class="pfp__check" src="assets/svg/checkmark.svg" alt=""></button>
+        <button class="pfp"><img src="assets/svg/profile-pics/social_pic.svg" alt="Social"><img class="pfp__check" src="assets/svg/checkmark.svg" alt=""></button>
+        <button class="pfp"><img src="assets/svg/profile-pics/game_pic.svg" alt="Game"><img class="pfp__check" src="assets/svg/checkmark.svg" alt=""></button>
+        <button class="pfp"><img src="assets/svg/profile-pics/tasks_pic.svg" alt="Tasks"><img class="pfp__check" src="assets/svg/checkmark.svg" alt=""></button>
+        <button class="pfp"><img src="assets/svg/profile-pics/discovery_pic.svg" alt="Discovery"><img class="pfp__check" src="assets/svg/checkmark.svg" alt=""></button>
+        <button class="pfp"><img src="assets/svg/profile-pics/selfcare_pic.svg" alt="Selfcare"><img class="pfp__check" src="assets/svg/checkmark.svg" alt=""></button>
+        <button class="pfp"><img src="assets/svg/profile-pics/inside_pic.svg" alt="Inside"><img class="pfp__check" src="assets/svg/checkmark.svg" alt=""></button>
+      </div>
+    </section>
+
+    <!-- LEVEL SHAPES (liquid fill) -->
+    <section class="sg-section">
+      <h2>Level shapes</h2>
+      <span class="sg-label">LIQUID FILL — ANIMATES TO LEVEL</span>
+      <div class="row" style="align-items:flex-end; gap:var(--space-24)">
+        <div class="level-shape cat-outside shape-outside" data-level="62%">
+          <div class="level-shape__fill"><div class="level-shape__liquid"></div></div>
+          <div class="level-shape__outline"></div>
+        </div>
+        <div class="level-shape cat-indoor shape-indoors" data-level="38%">
+          <div class="level-shape__fill"><div class="level-shape__liquid"></div></div>
+          <div class="level-shape__outline"></div>
+        </div>
+        <div class="level-shape cat-social shape-social" data-level="80%">
+          <div class="level-shape__fill"><div class="level-shape__liquid"></div></div>
+          <div class="level-shape__outline"></div>
+        </div>
+      </div>
+      <div class="row" style="margin-top:var(--space-24)">
+        <div class="level-shape level-shape--lg cat-indoor shape-indoors" data-level="50%">
+          <div class="level-shape__fill"><div class="level-shape__liquid"></div></div>
+          <div class="level-shape__outline"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ATTENTION MESSAGES -->
+    <section class="sg-section">
+      <h2>Attention messages</h2>
+      <div class="stack">
+        <div class="attention">
+          This is a short message to gain the users attention on something
+          <span class="attention__badge"><img src="assets/svg/icons/exclaimation_black.svg" alt=""></span>
+        </div>
+        <div class="attention--big attention">
+          <span class="attention__badge"><img src="assets/svg/icons/exclaimation_black.svg" alt=""></span>
+          This is a short message to gain the users attention on something
+        </div>
+        <div class="attention--big attention" style="text-align:left">
+          Max Mustermann, is that right?
+          <div class="attention__buttons">
+            <button class="btn">No, I’ll try again</button>
+            <button class="btn">Yes, that’s right</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFILE CARD -->
+    <section class="sg-section">
+      <h2>Profile card</h2>
+      <span class="sg-label">CLICK "TOTAL QUESTS" TO EXPAND</span>
+      <div class="profile-card">
+        <div class="profile-card__avatar"><img src="assets/svg/profile-pics/outside_pic.svg" alt=""></div>
+        <div class="profile-card__name">Max Mustermann</div>
+        <div class="profile-card__title">Title</div>
+        <div class="profile-card__line"></div>
+        <div class="profile-card__totals">
+          <span>Total Quests</span>
+          <span class="profile-card__totals-num">100</span>
+          <img class="profile-card__chevron" src="assets/svg/icons/back_black.svg" alt="">
+        </div>
+        <div class="profile-card__detail"><div class="profile-card__detail-inner">
+          <div class="profile-card__cat"><span>Outside</span><span class="profile-card__cat-num">66</span></div>
+          <div class="profile-card__cat"><span>Indoor</span><span class="profile-card__cat-num">52</span></div>
+          <div class="profile-card__cat"><span>Social</span><span class="profile-card__cat-num">14</span></div>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- QUEST CARDS -->
+    <section class="sg-section">
+      <h2>Quest cards (select)</h2>
+      <div class="quest-list">
+        <article class="quest-card cat-indoor">
+          <span class="quest-card__tag">Tasks</span>
+          <span class="quest-card__shape qs-tasks"></span>
+          <p class="quest-card__desc">This is a short description of sidequest of a specific category</p>
+        </article>
+        <article class="quest-card cat-outside">
+          <span class="quest-card__tag">Outside</span>
+          <span class="quest-card__shape qs-outside"></span>
+          <p class="quest-card__desc">This is a short description of sidequest of a specific category</p>
+        </article>
+        <article class="quest-card cat-social is-blocked">
+          <span class="quest-card__tag">Social</span>
+          <span class="quest-card__shape qs-social"></span>
+          <p class="quest-card__desc">Blocked / pressed state uses the muted active colour</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- QUEST OVERVIEW + PHOTO -->
+    <section class="sg-section">
+      <h2>Quest overview</h2>
+      <div class="quest-overview cat-indoor">
+        <span class="quest-card__tag">Subcategory</span>
+        <div class="quest-overview__head">
+          <span class="quest-card__shape qs-tasks"></span>
+          <p class="quest-card__desc">This is a short description of sidequest of a specific category</p>
+        </div>
+        <div class="photo photo--wide"><span class="img-placeholder"></span></div>
+        <div class="quest-overview__date">01.01.2026</div>
+      </div>
+      <span class="sg-label" style="margin-top:var(--space-24)">WITHOUT DATE (LONG PHOTO 3:4)</span>
+      <div class="quest-overview cat-social">
+        <span class="quest-card__tag">Subcategory</span>
+        <div class="quest-overview__head">
+          <span class="quest-card__shape qs-social"></span>
+          <p class="quest-card__desc">This is a short description of sidequest of a specific category</p>
+        </div>
+        <div class="photo photo--long"><span class="img-placeholder"></span></div>
+      </div>
+    </section>
+
+    <!-- GALLERY CARDS -->
+    <section class="sg-section">
+      <h2>Gallery cards</h2>
+      <div class="gallery-grid">
+        <article class="gallery-card cat-outside">
+          <div class="gallery-card__photo"><span class="img-placeholder"></span></div>
+          <p class="gallery-card__desc">This is a short description of sidequest of a specific category</p>
+        </article>
+        <article class="gallery-card cat-indoor is-selected">
+          <div class="gallery-card__photo"><span class="img-placeholder"></span></div>
+          <p class="gallery-card__desc">This is a short description of sidequest of a specific category</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- BOTTOM BAR -->
+    <section class="sg-section">
+      <h2>Bottom bar</h2>
+      <span class="sg-label">CLICK A TAB TO SWITCH</span>
+      <nav class="bottom-bar" data-active="quests">
+        <div class="bottom-bar__seg bottom-bar__seg--left">
+          <span class="bottom-bar__fill bottom-bar__fill--inactive"></span>
+          <span class="bottom-bar__fill bottom-bar__fill--active"></span>
+        </div>
+        <div class="bottom-bar__seg bottom-bar__seg--right">
+          <span class="bottom-bar__fill bottom-bar__fill--inactive"></span>
+          <span class="bottom-bar__fill bottom-bar__fill--active"></span>
+        </div>
+        <button class="bottom-bar__tab bottom-bar__tab--quests" aria-label="Quests">
+          <span class="bb-ic">
+            <img class="ic ic--black" src="assets/svg/icons/quests_black.svg" alt="">
+            <img class="ic ic--white" src="assets/svg/icons/quests_white.svg" alt="">
+          </span>
+        </button>
+        <button class="bottom-bar__tab bottom-bar__tab--profile" aria-label="Profile">
+          <span class="bb-ic">
+            <img class="ic ic--black" src="assets/svg/icons/profile_black.svg" alt="">
+            <img class="ic ic--white" src="assets/svg/icons/profile_white.svg" alt="">
+          </span>
+        </button>
+      </nav>
+    </section>
+
+    <!-- LOADING ANIMATION -->
+    <section class="sg-section">
+      <h2>Loading animation</h2>
+      <span class="sg-label">SHAPES CYCLE THROUGH CATEGORY VARIANTS</span>
+      <div class="loading-shapes">
+        <div class="loading-shape" data-cat="outside"><img src="assets/svg/shapes/outside_color.svg" alt=""></div>
+        <div class="loading-shape" data-cat="indoor"><img src="assets/svg/shapes/indoors_color.svg" alt=""></div>
+        <div class="loading-shape" data-cat="social"><img src="assets/svg/shapes/social_color.svg" alt=""></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/components.js"></script>
+</body>
+</html>

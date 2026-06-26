@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0" />
+  <title>Go Touch Grass</title>
+  <link rel="stylesheet" href="css/design-system.css" />
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="app__screens">
+
+      <!-- ===== LOADING ===== -->
+      <section class="screen screen--loading" data-screen="loading">
+        <h1 class="screen--loading__title text-headline-caps">Choosing todays sidequests...</h1>
+        <div class="loading-shapes" id="loadingShapes">
+          <div class="loading-shape" data-cat="outside"><img src="assets/svg/shapes/outside_color.svg" alt=""></div>
+          <div class="loading-shape" data-cat="indoor"><img src="assets/svg/shapes/indoors_color.svg" alt=""></div>
+          <div class="loading-shape" data-cat="social"><img src="assets/svg/shapes/social_color.svg" alt=""></div>
+        </div>
+      </section>
+
+      <!-- ===== FIRST-TIME: welcome (logo animation) ===== -->
+      <section class="screen screen--welcome" data-screen="welcome">
+        <h1 class="welcome-text text-headline-caps">Hey, welcome to Go Touch Grass!</h1>
+        <div class="welcome-logo"><img src="assets/svg/logo_green.svg" alt="Go Touch Grass"></div>
+      </section>
+
+      <!-- ===== FIRST-TIME: name ===== -->
+      <section class="screen screen--firstname" data-screen="firstname">
+        <h1 class="text-headline-caps firstname-title">What should we call you?</h1>
+        <input class="field" id="firstnameInput" placeholder="Your Text here" maxlength="24" autocomplete="off">
+        <div class="set-actions"><button class="btn" id="btnNameConfirm">Confirm</button></div>
+      </section>
+
+      <!-- ===== FIRST-TIME: name confirm ===== -->
+      <section class="screen screen--firstname-confirm" data-screen="firstname-confirm">
+        <h1 class="text-headline-caps firstname-title" id="confirmName">Max Mustermann, is that right?</h1>
+        <div class="firstname-actions">
+          <button class="btn" id="btnNameRetry">No, I'll try again</button>
+          <button class="btn" id="btnNameYes">Yes, that's right</button>
+        </div>
+      </section>
+
+      <!-- ===== TODAYS SIDEQUESTS (+ blocking mode) ===== -->
+      <section class="screen screen--sidequests" data-screen="sidequests">
+        <header class="header screen__head" id="headNormal">
+          <h1 class="header__title">Todays Sidequests</h1>
+          <button class="icon-btn" id="btnBlock" aria-label="Block sidequests">
+            <img class="icon-btn__icon icon-btn__icon--black" src="assets/svg/icons/block_black.svg" alt="">
+            <img class="icon-btn__icon icon-btn__icon--white" src="assets/svg/icons/block_white.svg" alt="">
+          </button>
+        </header>
+        <header class="header screen__head" id="headBlocking" hidden>
+          <button class="nav-arrow" id="btnBlockBack" aria-label="Back"><img src="assets/svg/icons/back_black.svg" alt=""></button>
+          <h1 class="header__title">Blocking Sidequests</h1>
+          <button class="icon-btn" id="btnBlockDone" aria-label="Done blocking">
+            <img class="icon-btn__icon icon-btn__icon--black" src="assets/svg/icons/check_black.svg" alt="">
+            <img class="icon-btn__icon icon-btn__icon--white" src="assets/svg/icons/check_white.svg" alt="">
+          </button>
+        </header>
+        <div class="quest-list" id="questList"></div>
+      </section>
+
+      <!-- ===== CAPTURE PROOF (camera) ===== -->
+      <section class="screen screen--camera" data-screen="camera">
+        <header class="header screen__head">
+          <button class="nav-arrow" id="btnCamBack" aria-label="Back"><img src="assets/svg/icons/back_black.svg" alt=""></button>
+          <h1 class="header__title">Capture Proof</h1>
+        </header>
+        <div id="camQuest"></div>
+        <div class="camera">
+          <video class="camera__video" id="camVideo" autoplay playsinline muted></video>
+          <div class="camera__hint" id="camHint"></div>
+          <button class="icon-btn camera__upload" id="btnUpload" aria-label="Upload from device">
+            <img class="icon-btn__icon icon-btn__icon--black" src="assets/svg/icons/upload_black.svg" alt="">
+            <img class="icon-btn__icon icon-btn__icon--white" src="assets/svg/icons/upload_white.svg" alt="">
+          </button>
+          <div class="camera__controls">
+            <button class="camera__ctrl" id="btnFlash" aria-label="Toggle flash"><img src="assets/svg/icons/flash_off_white.svg" alt=""></button>
+            <button class="camera__shutter" id="btnShutter" aria-label="Take photo"></button>
+            <button class="camera__ctrl" id="btnSwitch" aria-label="Switch camera"><img src="assets/svg/icons/camera_switch_white.svg" alt=""></button>
+          </div>
+        </div>
+        <input type="file" id="fileInput" accept="image/*" hidden>
+      </section>
+
+      <!-- ===== REVIEW (Redo / Finish) ===== -->
+      <section class="screen screen--review" data-screen="review">
+        <header class="header screen__head">
+          <button class="nav-arrow" id="btnReviewBack" aria-label="Back"><img src="assets/svg/icons/back_black.svg" alt=""></button>
+          <h1 class="header__title">Capture Proof</h1>
+        </header>
+        <div id="reviewOverview"></div>
+        <div class="btn-row">
+          <button class="btn" id="btnRedo">Redo</button>
+          <button class="btn" id="btnFinish">Finish</button>
+        </div>
+      </section>
+
+      <!-- ===== SIDEQUEST COMPLETED ===== -->
+      <section class="screen screen--completed" data-screen="completed">
+        <h1 class="screen__head text-headline-caps">Sidequest Completed!</h1>
+        <div id="completedOverview"></div>
+      </section>
+
+      <!-- ===== LEVEL UP / EXP ===== -->
+      <section class="screen screen--exp" data-screen="exp">
+        <h1 class="text-headline-caps exp__headline" id="expHeadline">Well done!</h1>
+        <div class="exp__stage">
+          <img class="exp__flyicon" id="expFly" alt="">
+          <div class="exp__shapewrap">
+            <div class="level-shape level-shape--lg exp__shape" id="expShape">
+              <div class="level-shape__fill"><div class="level-shape__liquid"></div></div>
+              <div class="level-shape__outline"></div>
+            </div>
+            <span class="exp__level"><span class="exp__lvl-txt">Lvl.</span><span class="exp__lvl-num" id="expLevelNum">1</span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SUMMARY (all done for today) ===== -->
+      <section class="screen screen--summary" data-screen="summary">
+        <h1 class="screen__head text-headline-caps">All done for today!</h1>
+        <div id="summaryOverview"></div>
+      </section>
+
+      <!-- ===== PROFILE ===== -->
+      <section class="screen screen--profile" data-screen="profile">
+        <button class="icon-btn profile-burger" id="btnBurger" aria-label="Menu (settings)">
+          <img class="icon-btn__icon icon-btn__icon--black" src="assets/svg/icons/burger_black.svg" alt="">
+          <img class="icon-btn__icon icon-btn__icon--white" src="assets/svg/icons/burger_white.svg" alt="">
+        </button>
+
+        <div class="profile-scroll">
+        <div class="attention profile-msg" id="profileMsg" hidden>
+          <span id="profileMsgText"></span>
+          <span class="attention__badge"><img src="assets/svg/icons/exclaimation_black.svg" alt=""></span>
+        </div>
+        <div class="profile-card" id="profileCard">
+          <div class="profile-card__avatar"><span class="img-placeholder"></span></div>
+          <div class="profile-card__name" id="profileName">Max Mustermann</div>
+          <div class="profile-card__title" id="profileTitle">Newbie</div>
+          <div class="profile-card__line"></div>
+          <div class="profile-card__totals" id="profileTotals" role="button" tabindex="0" aria-expanded="false">
+            <span>Total Quests</span>
+            <span class="profile-card__totals-num" id="profileTotalNum">0</span>
+            <img class="profile-card__chevron" src="assets/svg/icons/back_black.svg" alt="">
+          </div>
+          <div class="profile-card__detail"><div class="profile-card__detail-inner">
+            <div class="profile-card__cat"><span>Outside</span><span class="profile-card__cat-num" id="cntOutside">0</span></div>
+            <div class="profile-card__cat"><span>Indoor</span><span class="profile-card__cat-num" id="cntIndoor">0</span></div>
+            <div class="profile-card__cat"><span>Social</span><span class="profile-card__cat-num" id="cntSocial">0</span></div>
+          </div></div>
+        </div>
+
+        <div class="level-box">
+          <div class="level-stat">
+            <span class="level-stat__label">Outside</span>
+            <div class="level-stat__shape">
+              <div class="level-shape cat-outside shape-outside" id="lvlOutside">
+                <div class="level-shape__fill"><div class="level-shape__liquid"></div></div>
+                <div class="level-shape__outline"></div>
+              </div>
+              <span class="level-stat__num" id="lvlNumOutside">1</span>
+            </div>
+          </div>
+          <div class="level-stat">
+            <span class="level-stat__label">Indoor</span>
+            <div class="level-stat__shape">
+              <div class="level-shape cat-indoor shape-indoors" id="lvlIndoor">
+                <div class="level-shape__fill"><div class="level-shape__liquid"></div></div>
+                <div class="level-shape__outline"></div>
+              </div>
+              <span class="level-stat__num" id="lvlNumIndoor">1</span>
+            </div>
+          </div>
+          <div class="level-stat">
+            <span class="level-stat__label">Social</span>
+            <div class="level-stat__shape">
+              <div class="level-shape cat-social shape-social" id="lvlSocial">
+                <div class="level-shape__fill"><div class="level-shape__liquid"></div></div>
+                <div class="level-shape__outline"></div>
+              </div>
+              <span class="level-stat__num" id="lvlNumSocial">1</span>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="profile-section-title text-headline-sm">Your Quests</h2>
+        <div class="gallery">
+          <div class="gallery-grid" id="galleryGrid" hidden></div>
+          <p class="gallery-empty" id="galleryEmpty">Nothing here yet.</p>
+        </div>
+        </div>
+      </section>
+
+      <!-- ===== QUEST OVERVIEW detail (from gallery) ===== -->
+      <section class="screen screen--detail" data-screen="detail">
+        <header class="header screen__head">
+          <button class="nav-arrow" id="btnDetailBack" aria-label="Back"><img src="assets/svg/icons/back_black.svg" alt=""></button>
+          <span style="flex:1"></span>
+          <button class="icon-btn" id="btnDetailArchive" aria-label="Archive sidequest">
+            <img class="icon-btn__icon icon-btn__icon--black" src="assets/svg/icons/archive_black.svg" alt="">
+            <img class="icon-btn__icon icon-btn__icon--white" src="assets/svg/icons/archive_white.svg" alt="">
+          </button>
+        </header>
+        <div class="detail-body"><div id="detailOverview"></div></div>
+        <div class="detail-save">
+          <button class="btn" id="btnDetailSave">Save to device</button>
+        </div>
+      </section>
+
+      <!-- ===== SETTINGS (overview) ===== -->
+      <section class="screen screen--settings" data-screen="settings">
+        <header class="header screen__head">
+          <button class="nav-arrow" data-back aria-label="Back"><img src="assets/svg/icons/back_black.svg" alt=""></button>
+          <h1 class="header__title">Settings</h1>
+        </header>
+        <div class="settings-list">
+          <button class="list-btn list-btn--nav" data-go="set-profile">
+            <span class="list-btn__label">Profile</span>
+            <span class="list-btn__trailing">
+              <img class="list-btn__chevron list-btn__chevron--black" src="assets/svg/icons/back_black.svg" alt="">
+              <img class="list-btn__chevron list-btn__chevron--white" src="assets/svg/icons/back_white.svg" alt="">
+            </span>
+          </button>
+          <div class="list-btn list-btn--static" aria-disabled="true">
+            <span class="list-btn__label">Account</span>
+            <span class="list-btn__trailing"><img class="list-btn__chevron" src="assets/svg/icons/back_black.svg" alt=""></span>
+          </div>
+          <div class="list-btn">
+            <span class="list-btn__label">Push Notifications</span>
+            <span class="list-btn__trailing"><button class="switch" id="swPush" aria-checked="false" aria-label="Push notifications"></button></span>
+          </div>
+          <div class="list-btn">
+            <span class="list-btn__label">Sounds</span>
+            <span class="list-btn__trailing"><button class="switch" id="swSounds" aria-checked="false" aria-label="Sounds"></button></span>
+          </div>
+          <button class="list-btn list-btn--nav" data-go="set-language">
+            <span class="list-btn__label">Language</span>
+            <span class="list-btn__trailing">
+              <img class="list-btn__chevron list-btn__chevron--black" src="assets/svg/icons/back_black.svg" alt="">
+              <img class="list-btn__chevron list-btn__chevron--white" src="assets/svg/icons/back_white.svg" alt="">
+            </span>
+          </button>
+          <button class="list-btn list-btn--nav" data-go="set-blocked">
+            <span class="list-btn__label">Blocked Sidequests</span>
+            <span class="list-btn__trailing">
+              <img class="list-btn__chevron list-btn__chevron--black" src="assets/svg/icons/back_black.svg" alt="">
+              <img class="list-btn__chevron list-btn__chevron--white" src="assets/svg/icons/back_white.svg" alt="">
+            </span>
+          </button>
+          <button class="list-btn list-btn--nav" data-go="set-archived">
+            <span class="list-btn__label">Archived Sidequests</span>
+            <span class="list-btn__trailing">
+              <img class="list-btn__chevron list-btn__chevron--black" src="assets/svg/icons/back_black.svg" alt="">
+              <img class="list-btn__chevron list-btn__chevron--white" src="assets/svg/icons/back_white.svg" alt="">
+            </span>
+          </button>
+          <button class="list-btn list-btn--nav" data-go="set-permissions">
+            <span class="list-btn__label">Permissions</span>
+            <span class="list-btn__trailing">
+              <img class="list-btn__chevron list-btn__chevron--black" src="assets/svg/icons/back_black.svg" alt="">
+              <img class="list-btn__chevron list-btn__chevron--white" src="assets/svg/icons/back_white.svg" alt="">
+            </span>
+          </button>
+          <div class="list-btn list-btn--static" aria-disabled="true">
+            <span class="list-btn__label">About</span>
+            <span class="list-btn__trailing"><img class="list-btn__chevron" src="assets/svg/icons/back_black.svg" alt=""></span>
+          </div>
+          <div class="list-btn list-btn--static" aria-disabled="true">
+            <span class="list-btn__label">Privacy Policy</span>
+            <span class="list-btn__trailing"><img class="list-btn__chevron" src="assets/svg/icons/back_black.svg" alt=""></span>
+          </div>
+          <button class="list-btn list-btn--nav" data-go="set-debug">
+            <span class="list-btn__label">Terms of Service</span>
+            <span class="list-btn__trailing">
+              <img class="list-btn__chevron list-btn__chevron--black" src="assets/svg/icons/back_black.svg" alt="">
+              <img class="list-btn__chevron list-btn__chevron--white" src="assets/svg/icons/back_white.svg" alt="">
+            </span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ===== SETTINGS: Profile ===== -->
+      <section class="screen screen--set-profile" data-screen="set-profile">
+        <header class="header screen__head">
+          <button class="nav-arrow" data-back aria-label="Back"><img src="assets/svg/icons/back_black.svg" alt=""></button>
+          <h1 class="header__title">Profile</h1>
+        </header>
+        <div class="set-avatar" id="setProfileAvatar"><span class="img-placeholder"></span></div>
+        <div class="input-card input-card--display">
+          <div class="input-card__top">
+            <span class="input-card__label">Profile Picture</span>
+            <button class="icon-btn-sm" id="btnEditPic" aria-label="Edit profile picture">
+              <img class="icon-btn__icon icon-btn__icon--black" src="assets/svg/icons/edit_black.svg" alt="">
+              <img class="icon-btn__icon icon-btn__icon--white" src="assets/svg/icons/edit_white.svg" alt="">
+            </button>
+          </div>
+        </div>
+        <div class="input-card" id="nameCard">
+          <div class="input-card__top">
+            <span class="input-card__label">Name</span>
+            <span class="input-card__value" id="nameValue">Max Mustermann</span>
+            <button class="icon-btn-sm" id="btnEditName" aria-label="Edit name">
+              <img class="icon-btn__icon icon-btn__icon--black" src="assets/svg/icons/edit_black.svg" alt="">
+              <img class="icon-btn__icon icon-btn__icon--white" src="assets/svg/icons/edit_white.svg" alt="">
+            </button>
+            <button class="icon-btn-sm" id="btnSaveName" aria-label="Save name">
+              <img class="icon-btn__icon icon-btn__icon--black" src="assets/svg/icons/check_black.svg" alt="">
+              <img class="icon-btn__icon icon-btn__icon--white" src="assets/svg/icons/check_white.svg" alt="">
+            </button>
+          </div>
+          <input class="field field--flush" id="nameInput" placeholder="Your Text here" maxlength="24">
+        </div>
+        <button class="list-btn list-btn--nav" data-go="set-title">
+          <span class="list-btn__label">Set Title</span>
+          <span class="list-btn__value" id="titleValue"></span>
+          <span class="list-btn__trailing">
+            <img class="list-btn__chevron list-btn__chevron--black" src="assets/svg/icons/back_black.svg" alt="">
+            <img class="list-btn__chevron list-btn__chevron--white" src="assets/svg/icons/back_white.svg" alt="">
+          </span>
+        </button>
+      </section>
+
+      <!-- ===== SETTINGS: Profile Picture ===== -->
+      <section class="screen screen--set-pfp" data-screen="set-pfp">
+        <div class="pfp-body">
+        <header class="header screen__head">
+          <button class="nav-arrow" data-back aria-label="Back"><img src="assets/svg/icons/back_black.svg" alt=""></button>
+          <h1 class="header__title">Profile Picture</h1>
+        </header>
+        <div class="set-avatar" id="pfpAvatar"><span class="img-placeholder"></span></div>
+        <div class="pfp-grid" id="pfpGrid">
+          <button class="pfp" data-pic="outside_pic"><img src="assets/svg/profile-pics/outside_pic.svg" alt="Outside"><img class="pfp__check" src="assets/svg/checkmark.svg" alt=""></button>
+          <button class="pfp" data-pic="scavenger_hunt_pic"><img src="assets/svg/profile-pics/scavenger_hunt_pic.svg" alt="Scavenger"><img class="pfp__check" src="assets/svg/checkmark.svg" alt=""></button>
+          <button class="pfp" data-pic="discovery_pic"><img src="assets/svg/profile-pics/discovery_pic.svg" alt="Discovery"><img class="pfp__check" src="assets/svg/checkmark.svg" alt=""></button>
+          <button class="pfp" data-pic="action_pic"><img src="assets/svg/profile-pics/action_pic.svg" alt="Action"><img class="pfp__check" src="assets/svg/checkmark.svg" alt=""></button>
+          <button class="pfp" data-pic="inside_pic"><img src="assets/svg/profile-pics/inside_pic.svg" alt="Inside"><img class="pfp__check" src="assets/svg/checkmark.svg" alt=""></button>
+          <button class="pfp" data-pic="creative_pic"><img src="assets/svg/profile-pics/creative_pic.svg" alt="Creative"><img class="pfp__check" src="assets/svg/checkmark.svg" alt=""></button>
+          <button class="pfp" data-pic="tasks_pic"><img src="assets/svg/profile-pics/tasks_pic.svg" alt="Tasks"><img class="pfp__check" src="assets/svg/checkmark.svg" alt=""></button>
+          <button class="pfp" data-pic="selfcare_pic"><img src="assets/svg/profile-pics/selfcare_pic.svg" alt="Selfcare"><img class="pfp__check" src="assets/svg/checkmark.svg" alt=""></button>
+          <button class="pfp" data-pic="social_pic"><img src="assets/svg/profile-pics/social_pic.svg" alt="Social"><img class="pfp__check" src="assets/svg/checkmark.svg" alt=""></button>
+          <button class="pfp" data-pic="game_pic"><img src="assets/svg/profile-pics/game_pic.svg" alt="Game"><img class="pfp__check" src="assets/svg/checkmark.svg" alt=""></button>
+          <button class="pfp" data-pic="encounter_pic"><img src="assets/svg/profile-pics/encounter_pic.svg" alt="Encounter"><img class="pfp__check" src="assets/svg/checkmark.svg" alt=""></button>
+          <button class="pfp" data-pic="activity_pic"><img src="assets/svg/profile-pics/activity_pic.svg" alt="Activity"><img class="pfp__check" src="assets/svg/checkmark.svg" alt=""></button>
+        </div>
+        <button class="list-btn list-btn--nav" id="btnUploadPic">
+          <span class="list-btn__label">Upload Picture</span>
+          <span class="list-btn__trailing">
+            <img class="list-btn__chevron list-btn__chevron--black" src="assets/svg/icons/back_black.svg" alt="">
+            <img class="list-btn__chevron list-btn__chevron--white" src="assets/svg/icons/back_white.svg" alt="">
+          </span>
+        </button>
+        <button class="list-btn list-btn--nav" id="btnTakePic">
+          <span class="list-btn__label">Take Picture</span>
+          <span class="list-btn__trailing">
+            <img class="list-btn__chevron list-btn__chevron--black" src="assets/svg/icons/back_black.svg" alt="">
+            <img class="list-btn__chevron list-btn__chevron--white" src="assets/svg/icons/back_white.svg" alt="">
+          </span>
+        </button>
+        </div>
+        <div class="pfp-actions">
+          <button class="btn" data-back>Cancel</button>
+          <button class="btn" id="btnPfpSave">Save</button>
+        </div>
+        <input type="file" id="pfpUploadInput" accept="image/*" hidden>
+        <input type="file" id="pfpCameraInput" accept="image/*" capture="user" hidden>
+      </section>
+
+      <!-- ===== SETTINGS: Crop new picture ===== -->
+      <section class="screen screen--set-crop" data-screen="set-crop">
+        <header class="header screen__head">
+          <button class="nav-arrow" data-back aria-label="Back"><img src="assets/svg/icons/back_black.svg" alt=""></button>
+          <h1 class="header__title">Crop Picture</h1>
+        </header>
+        <div class="crop-stage">
+          <div class="crop-box" id="cropBox">
+            <img class="crop-img" id="cropImg" alt="" draggable="false">
+            <div class="crop-ring"></div>
+          </div>
+          <input type="range" class="crop-zoom" id="cropZoom" min="1" max="3" step="0.01" value="1" aria-label="Zoom">
+        </div>
+        <div class="pfp-actions">
+          <button class="btn" data-back>Cancel</button>
+          <button class="btn" id="btnCropSave">Save</button>
+        </div>
+      </section>
+
+      <!-- ===== SETTINGS: Title ===== -->
+      <section class="screen screen--set-title" data-screen="set-title">
+        <header class="header screen__head">
+          <button class="nav-arrow" data-back aria-label="Back"><img src="assets/svg/icons/back_black.svg" alt=""></button>
+          <h1 class="header__title">Title</h1>
+        </header>
+        <div class="settings-list" id="titleList">
+          <button class="list-btn list-btn--select" data-title="Explorer"><span class="list-btn__label">Explorer</span><span class="list-btn__trailing"><span class="radio" aria-checked="false"></span></span></button>
+          <button class="list-btn list-btn--select" data-title="Scavenger"><span class="list-btn__label">Scavenger</span><span class="list-btn__trailing"><span class="radio" aria-checked="false"></span></span></button>
+          <button class="list-btn list-btn--select" data-title="Couch Potato"><span class="list-btn__label">Couch Potato</span><span class="list-btn__trailing"><span class="radio" aria-checked="false"></span></span></button>
+          <button class="list-btn list-btn--select" data-title="Social Butterfly"><span class="list-btn__label">Social Butterfly</span><span class="list-btn__trailing"><span class="radio" aria-checked="false"></span></span></button>
+          <button class="list-btn list-btn--select" data-title="Gamer"><span class="list-btn__label">Gamer</span><span class="list-btn__trailing"><span class="radio" aria-checked="false"></span></span></button>
+        </div>
+      </section>
+
+      <!-- ===== SETTINGS: Language ===== -->
+      <section class="screen screen--set-language" data-screen="set-language">
+        <header class="header screen__head">
+          <button class="nav-arrow" data-back aria-label="Back"><img src="assets/svg/icons/back_black.svg" alt=""></button>
+          <h1 class="header__title">Language</h1>
+        </header>
+        <div class="settings-list">
+          <div class="list-btn">
+            <span class="list-btn__label">English</span>
+            <span class="list-btn__trailing"><span class="radio" aria-checked="true"></span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SETTINGS: Blocked Sidequests ===== -->
+      <section class="screen screen--set-blocked" data-screen="set-blocked">
+        <header class="header screen__head">
+          <button class="nav-arrow" id="btnBlockedBack" aria-label="Back"><img src="assets/svg/icons/back_black.svg" alt=""></button>
+          <h1 class="header__title">Blocked Sidequests</h1>
+          <button class="icon-btn" id="btnBlockedEdit" aria-label="Select to unblock">
+            <img class="icon-btn__icon icon-btn__icon--black" src="assets/svg/icons/edit_black.svg" alt="">
+            <img class="icon-btn__icon icon-btn__icon--white" src="assets/svg/icons/edit_white.svg" alt="">
+          </button>
+          <button class="icon-btn" id="btnBlockedDone" aria-label="Confirm unblock" hidden>
+            <img class="icon-btn__icon icon-btn__icon--black" src="assets/svg/icons/check_black.svg" alt="">
+            <img class="icon-btn__icon icon-btn__icon--white" src="assets/svg/icons/check_white.svg" alt="">
+          </button>
+        </header>
+        <div class="blocked-head">
+          <span class="info-pill" id="blockedCount">You have blocked 0/40 Sidequests</span>
+          <button class="btn" id="btnSelectAll" hidden>Select all</button>
+        </div>
+        <div class="quest-list" id="blockedList"></div>
+        <p class="gallery-empty" id="blockedEmpty" hidden>Nothing here yet.</p>
+      </section>
+
+      <!-- ===== SETTINGS: Archived Sidequests ===== -->
+      <section class="screen screen--set-archived" data-screen="set-archived">
+        <header class="header screen__head">
+          <button class="nav-arrow" data-back aria-label="Back"><img src="assets/svg/icons/back_black.svg" alt=""></button>
+          <h1 class="header__title">Archived Sidequests</h1>
+        </header>
+        <div class="gallery">
+          <div class="gallery-grid" id="archivedGrid" hidden></div>
+          <p class="gallery-empty" id="archivedEmpty">Nothing here yet.</p>
+        </div>
+      </section>
+
+      <!-- ===== SETTINGS: Archived detail ===== -->
+      <section class="screen screen--set-archived-detail" data-screen="set-archived-detail">
+        <header class="header screen__head">
+          <button class="nav-arrow" data-back aria-label="Back"><img src="assets/svg/icons/back_black.svg" alt=""></button>
+          <span style="flex:1"></span>
+          <button class="icon-btn" id="btnDelImage" aria-label="Delete image">
+            <img class="icon-btn__icon icon-btn__icon--black" src="assets/svg/icons/delete_black.svg" alt="">
+            <img class="icon-btn__icon icon-btn__icon--white" src="assets/svg/icons/delete_white.svg" alt="">
+          </button>
+        </header>
+        <div class="detail-body"><div id="archivedOverview"></div></div>
+        <div class="detail-save"><button class="btn" id="btnRestore">Restore</button></div>
+      </section>
+
+      <!-- ===== SETTINGS: Permissions ===== -->
+      <section class="screen screen--set-permissions" data-screen="set-permissions">
+        <header class="header screen__head">
+          <button class="nav-arrow" data-back aria-label="Back"><img src="assets/svg/icons/back_black.svg" alt=""></button>
+          <h1 class="header__title">Permissions</h1>
+        </header>
+        <div class="settings-list">
+          <div class="list-btn">
+            <span class="list-btn__label">Camera</span>
+            <span class="list-btn__trailing"><button class="switch" data-perm="camera" aria-checked="false" aria-label="Camera permission"></button></span>
+          </div>
+          <div class="list-btn">
+            <span class="list-btn__label">Push Notifications</span>
+            <span class="list-btn__trailing"><button class="switch" data-perm="push" aria-checked="false" aria-label="Push notifications permission"></button></span>
+          </div>
+          <div class="list-btn">
+            <span class="list-btn__label">Photos on Device</span>
+            <span class="list-btn__trailing"><button class="switch" data-perm="photos" aria-checked="false" aria-label="Photos permission"></button></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SETTINGS: Debug (hidden behind Terms of Service) ===== -->
+      <section class="screen screen--set-debug" data-screen="set-debug">
+        <header class="header screen__head">
+          <button class="nav-arrow" data-back aria-label="Back"><img src="assets/svg/icons/back_black.svg" alt=""></button>
+          <h1 class="header__title">Debug</h1>
+        </header>
+        <div class="settings-list">
+          <button class="btn btn--block" id="btnDbgSkip">Bypass "all done for today"</button>
+          <button class="btn btn--block" id="btnDbgReset">Reset app</button>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- persistent bottom bar (quests active; profile connection added later) -->
+    <div class="app__nav">
+      <nav class="bottom-bar" data-active="quests">
+        <div class="bottom-bar__seg bottom-bar__seg--left">
+          <span class="bottom-bar__fill bottom-bar__fill--inactive"></span>
+          <span class="bottom-bar__fill bottom-bar__fill--active"></span>
+        </div>
+        <div class="bottom-bar__seg bottom-bar__seg--right">
+          <span class="bottom-bar__fill bottom-bar__fill--inactive"></span>
+          <span class="bottom-bar__fill bottom-bar__fill--active"></span>
+        </div>
+        <button class="bottom-bar__tab bottom-bar__tab--quests" aria-label="Quests">
+          <span class="bb-ic">
+            <img class="ic ic--black" src="assets/svg/icons/quests_black.svg" alt="">
+            <img class="ic ic--white" src="assets/svg/icons/quests_white.svg" alt="">
+          </span>
+        </button>
+        <button class="bottom-bar__tab bottom-bar__tab--profile" aria-label="Profile">
+          <span class="bb-ic">
+            <img class="ic ic--black" src="assets/svg/icons/profile_black.svg" alt="">
+            <img class="ic ic--white" src="assets/svg/icons/profile_white.svg" alt="">
+          </span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- block confirmation popup — covers the whole app (incl. bottom bar) -->
+    <div class="scrim" id="blockScrim">
+      <div class="attention attention--big popup" role="alertdialog" aria-modal="true">
+        <span class="attention__badge"><img src="assets/svg/icons/exclaimation_black.svg" alt=""></span>
+        <h2 class="popup__title" id="popupTitle">You're about to block this sidequest</h2>
+        <p class="popup__body">As long as sidequests are blocked, you won't get them again. You can unblock any quests in your settings.</p>
+        <div class="attention__buttons">
+          <button class="btn" id="btnCancel">Cancel</button>
+          <button class="btn" id="btnOk">Ok</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- archive confirmation popup — covers the whole app (incl. bottom bar) -->
+    <div class="scrim" id="archiveScrim">
+      <div class="attention attention--big popup" role="alertdialog" aria-modal="true">
+        <span class="attention__badge"><img src="assets/svg/icons/exclaimation_black.svg" alt=""></span>
+        <h2 class="popup__title">Archive Sidequest</h2>
+        <p class="popup__body">When archiving a sidequest, it will disappear from your quest overview. You can restore it in your settings.</p>
+        <div class="attention__buttons">
+          <button class="btn" id="btnArchiveCancel">Cancel</button>
+          <button class="btn" id="btnArchiveConfirm">Archive</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- unblock confirmation popup -->
+    <div class="scrim" id="unblockScrim">
+      <div class="attention attention--big popup" role="alertdialog" aria-modal="true">
+        <span class="attention__badge"><img src="assets/svg/icons/exclaimation_black.svg" alt=""></span>
+        <h2 class="popup__title">You're about to unblock these quests</h2>
+        <p class="popup__body">You can only block them again if they appear in your daily sidequest selection.</p>
+        <div class="attention__buttons">
+          <button class="btn" id="btnUnblockCancel">Cancel</button>
+          <button class="btn" id="btnUnblockOk">Ok</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- delete-image confirmation popup -->
+    <div class="scrim" id="deleteImageScrim">
+      <div class="attention attention--big popup" role="alertdialog" aria-modal="true">
+        <span class="attention__badge"><img src="assets/svg/icons/exclaimation_black.svg" alt=""></span>
+        <h2 class="popup__title">Delete Image</h2>
+        <p class="popup__body">Delete the proof photo from your archived quest. The image cannot be restored.</p>
+        <div class="attention__buttons">
+          <button class="btn" id="btnDelImgCancel">Cancel</button>
+          <button class="btn" id="btnDelImgConfirm">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- permissions → phone settings popup -->
+    <div class="scrim" id="permsScrim">
+      <div class="attention attention--big popup" role="alertdialog" aria-modal="true">
+        <span class="attention__badge"><img src="assets/svg/icons/exclaimation_black.svg" alt=""></span>
+        <h2 class="popup__title">Please change the permissions in your phone settings:</h2>
+        <p class="popup__body">Settings &gt; Apps &gt; Go Touch Grass &gt; Permissions</p>
+        <div class="attention__buttons">
+          <button class="btn" id="btnPermsCancel">Cancel</button>
+          <button class="btn" id="btnPermsOk">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/quests.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

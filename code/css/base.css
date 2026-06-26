@@ -1,0 +1,48 @@
+/* ============================================================
+   Go Touch Grass — Base / reset
+   Minimal, mobile-first resets. Sets the page background and the
+   default body type (Body Text from 1.2).
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-border);
+
+  /* default = Body Text */
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: var(--tracking-title);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* media defaults */
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* let buttons/inputs inherit the type system rather than UA styles */
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}

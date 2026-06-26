@@ -1,0 +1,719 @@
+/* ============================================================
+   Go Touch Grass — Components
+   Rebuilt to match "component set up.pdf".
+   Designed at a 412px-wide reference; all sizing is responsive
+   (fills its container, ratios preserved via aspect-ratio).
+   Only the style-guide fonts & colors are used. Design constants
+   (border 1–2px, hard 4·4·0 shadow, radii) stay fixed.
+   ============================================================ */
+
+/* ---------- responsive frame ----------
+   The reference column. Content fills the width up to the 412px
+   design width (→ inner 380px with 16px gutters), and scales down
+   on narrower phones. */
+.gtg-stage {
+  width: 100%;
+  max-width: var(--app-width);   /* 412px */
+  margin-inline: auto;
+  padding-inline: var(--space-16);
+}
+
+/* ---------- category theming helpers ---------- */
+.cat-indoor  { --cat: var(--color-indoor);  --cat-active: var(--color-indoor-active);  --cat-key: indoors; }
+.cat-outside { --cat: var(--color-outside); --cat-active: var(--color-outside-active); --cat-key: outside; }
+.cat-social  { --cat: var(--color-social);  --cat-active: var(--color-social-active);  --cat-key: social; }
+
+/* shape mask + outline pairs (paths resolve relative to this file) */
+.shape-indoors { --shape-mask: url("../assets/svg/shapes/indoors_color.svg"); --shape-outline: url("../assets/svg/shapes/indoors_outline.svg"); }
+.shape-outside { --shape-mask: url("../assets/svg/shapes/outside_color.svg"); --shape-outline: url("../assets/svg/shapes/outside_outline.svg"); }
+.shape-social  { --shape-mask: url("../assets/svg/shapes/social_color.svg");  --shape-outline: url("../assets/svg/shapes/social_outline.svg"); }
+
+/* ===================================================================
+   BUTTONS
+   =================================================================== */
+
+/* Slim button (Cancel / Save / Confirm / Yes / No)
+   spec: 48px tall pill, padding 16px 24px, 1px border, shadow,
+   Body text centered. Pressed → dark fill + cream text. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 24px;
+  background: var(--color-bg);
+  color: var(--color-border);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;                 /* = pill at 48px tall */
+  box-shadow: var(--shadow-card);
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform .08s ease, box-shadow .08s ease,
+              background-color .12s ease, color .12s ease;
+}
+.btn:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 0 var(--color-border); }
+.btn:active,
+.btn.is-active {
+  background: var(--color-border);
+  color: var(--color-bg);
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 0 var(--color-border);
+}
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  color: var(--color-border-active);
+  border-color: var(--color-border-active);
+  box-shadow: 4px 4px 0 0 var(--color-border-active);
+  cursor: not-allowed;
+  transform: none;
+}
+/* equal buttons in a row (Cancel | Save) — replaces fixed 182px */
+.btn-row { display: flex; gap: var(--space-16); }
+.btn-row > .btn { flex: 1; }
+.btn--block { display: flex; width: 100%; }
+
+/* ---------- Icon buttons ----------
+   button standard: padding 16px → 56×56, radius 24, 1px border.
+   button small:    padding 8px  → 40×40, radius 16, 1px border.
+   Default: cream + dark icon (+ resting shadow, matching screens).
+   Pressed/active: dark fill + white icon. Icon swaps via 2 layers. */
+.icon-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition: transform .08s ease, box-shadow .08s ease, background-color .12s ease;
+}
+/* Small icon button (40px) — standalone, NEVER has a box-shadow.
+   Press → background switches to border black, icon switches to background white.
+   Hover does not add a shadow (or anything). */
+.icon-btn-sm {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  padding: 8px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: background-color .12s linear;
+}
+.icon-btn-sm:active { background: var(--color-border); }
+.icon-btn-sm:active .icon-btn__icon--black { opacity: 0; }
+.icon-btn-sm:active .icon-btn__icon--white { opacity: 1; }
+.icon-btn__icon { width: 24px; height: 24px; display: block; }
+.icon-btn__icon--white { position: absolute; opacity: 0; transition: opacity .12s ease; }
+.icon-btn:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 0 var(--color-border); }
+.icon-btn:active,
+.icon-btn.is-active {
+  background: var(--color-border);
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 0 var(--color-border);
+}
+.icon-btn:active .icon-btn__icon--black,
+.icon-btn.is-active .icon-btn__icon--black { opacity: 0; }
+.icon-btn:active .icon-btn__icon--white,
+.icon-btn.is-active .icon-btn__icon--white { opacity: 1; }
+/* disabled icon button */
+.icon-btn:disabled { opacity: .4; box-shadow: none; pointer-events: none; }
+/* inert icon button — keeps its normal look but does nothing (no hover, no press, no click) */
+.icon-btn.is-inert { pointer-events: none; }
+/* bare chevron (header back arrow — no button chrome) */
+.nav-arrow {
+  display: inline-flex; padding: 0; border: 0; background: none; cursor: pointer;
+  transition: transform .12s ease;
+}
+.nav-arrow img { width: 24px; height: 24px; display: block; }
+.nav-arrow:hover { transform: translateX(-2px); }
+/* never let an icon button squish in a flex header */
+.icon-btn, .icon-btn-sm, .nav-arrow { flex: none; }
+
+/* ===================================================================
+   LIST BUTTONS / ROWS  (380×80, radius 24, 2px border, shadow)
+   =================================================================== */
+.list-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  width: 100%;
+  min-height: 80px;
+  padding: 0 24px;
+  background: var(--color-bg);
+  color: var(--color-border);
+  border: 2px solid var(--color-border);
+  border-radius: 24px;
+  box-shadow: var(--shadow-card);
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: left;
+  cursor: pointer;
+  transition: transform .08s ease, box-shadow .08s ease,
+              background-color .12s ease, color .12s ease;
+}
+.list-btn__label { flex: 1; }
+.list-btn__value { color: var(--color-border-active); }
+.list-btn__trailing { flex: none; display: inline-flex; align-items: center; position: relative; }
+/* forward chevron = back_black rotated 180° (per spec) */
+.list-btn__chevron { width: 24px; height: 24px; transform: rotate(180deg); transition: opacity .12s; }
+.list-btn__chevron--white { position: absolute; opacity: 0; }
+
+/* navigable list button (chevron) inverts dark on press */
+.list-btn--nav:hover { transform: translate(-1px,-1px); box-shadow: 5px 5px 0 0 var(--color-border); }
+.list-btn--nav:active {
+  background: var(--color-border);
+  color: var(--color-bg);
+  transform: translate(4px,4px);
+  box-shadow: 0 0 0 0 var(--color-border);
+}
+.list-btn--nav { position: relative; }
+.list-btn--nav:active .list-btn__chevron--black { opacity: 0; }
+.list-btn--nav:active .list-btn__chevron--white { opacity: 1; }
+/* switch / button rows don't invert (interactive trailing element) */
+
+/* ===================================================================
+   TEXT FIELDS  (radius 24 = pill at 48px tall, 2px border)
+   =================================================================== */
+.field {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 24px;
+  background: var(--color-bg);
+  color: var(--color-border);
+  border: 2px solid var(--color-border);
+  border-radius: 24px;
+  box-shadow: var(--shadow-card);     /* long / standalone field */
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+}
+.field::placeholder { color: var(--color-border); opacity: .55; }
+.field:focus { outline: none; }
+.field--flush { box-shadow: none; }   /* field nested inside a card */
+.field.is-masked { font-family: var(--font-mono); letter-spacing: .05em; }
+
+/* Input card: label + (edit/visibility) button + field
+   display row  = 80px (label + value + button, no inner field)
+   edit/visibility = 152px (label + button on top, field below) */
+.input-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-16);
+  width: 100%;
+  padding: var(--space-16) 24px;
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  border-radius: 24px;
+  box-shadow: var(--shadow-card);
+}
+.input-card__top { display: flex; align-items: center; justify-content: flex-start; gap: var(--space-16); }
+.input-card__top .icon-btn-sm { margin-left: auto; }
+.input-card__label { min-width: 104px; font-family: var(--font-body); font-size: 18px; font-weight: 500; line-height: 24px; }
+.input-card__value { margin-left: var(--space-8); color: var(--color-border-active); font-size: 12px; line-height: 16px; }
+.input-card--display { padding: 0 24px; min-height: 80px; }
+.input-card--display .input-card__top { width: 100%; }
+
+/* ===================================================================
+   RADIO BUTTON  (outer 32, inner 20) — built, animated
+   =================================================================== */
+.radio {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px; height: 32px;
+  flex: none;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-bg);
+  cursor: pointer;
+  padding: 0;
+}
+.radio::after {
+  content: "";
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--color-border);
+  transform: scale(0);
+  transition: transform .18s cubic-bezier(.34,1.56,.64,1);  /* springy pop */
+}
+.radio[aria-checked="true"]::after { transform: scale(1); }
+
+/* ===================================================================
+   SWITCH  (60×32 track) — built, animated
+   inactive: light track, 16px dark knob (left)
+   active:   dark track, 24px cream knob (right)
+   =================================================================== */
+.switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 60px; height: 32px;
+  flex: none;
+  padding: 0 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 32px;
+  background: var(--color-bg);
+  cursor: pointer;
+  transition: background-color .25s ease;
+}
+.switch::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  width: 16px; height: 16px;
+  border-radius: 64px;
+  background: var(--color-border);
+  transition: left .25s cubic-bezier(.4,0,.2,1),
+              width .25s ease, height .25s ease,
+              background-color .25s ease;
+}
+.switch[aria-checked="true"] { background: var(--color-border); }
+.switch[aria-checked="true"]::after {
+  left: calc(100% - 4px - 24px);
+  width: 24px; height: 24px;
+  background: var(--color-bg);
+}
+
+/* ===================================================================
+   PROFILE PICTURE selector  (72×72 avatar + 24px checkmark badge)
+   =================================================================== */
+.pfp-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-16);
+}
+.pfp {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.pfp > img:not(.pfp__check) { width: 100%; height: 100%; display: block; }
+.pfp__check {
+  position: absolute;
+  right: 2px; bottom: 2px;
+  width: 24px; height: 24px;
+  opacity: 0;
+  transform: scale(.4);
+  transition: opacity .15s ease, transform .2s cubic-bezier(.34,1.56,.64,1);
+}
+.pfp[aria-pressed="true"] .pfp__check { opacity: 1; transform: scale(1); }
+
+/* ===================================================================
+   LEVEL SHAPE — liquid fill (sizes 88 / 160), animated, scalable
+   --level: 0–100%  --cat: category color
+   =================================================================== */
+.level-shape {
+  position: relative;
+  width: 88px;
+  aspect-ratio: 1 / 1;
+  --level: 0%;
+}
+.level-shape--lg { width: 160px; }
+.level-shape__fill {
+  position: absolute;
+  inset: 0;
+  /* clip everything inside to the category shape silhouette */
+  -webkit-mask: var(--shape-mask) center / contain no-repeat;
+          mask: var(--shape-mask) center / contain no-repeat;
+  overflow: hidden;
+}
+.level-shape__liquid {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 0;
+  height: var(--level);
+  background: var(--cat, var(--color-indoor));
+  transition: height .9s cubic-bezier(.4,0,.2,1);
+}
+/* single smooth sine-wave crest scrolling across the liquid surface (flat fill) */
+.level-shape__liquid::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  bottom: calc(100% - 2px);
+  height: 14px;
+  background: var(--cat, var(--color-indoor));
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='14'%20preserveAspectRatio='none'%3E%3Cpath%20d='M0,7%20Q40,0%2080,7%20T160,7%20V14%20H0%20Z'%20fill='%23000'/%3E%3C/svg%3E");
+          mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='14'%20preserveAspectRatio='none'%3E%3Cpath%20d='M0,7%20Q40,0%2080,7%20T160,7%20V14%20H0%20Z'%20fill='%23000'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: repeat-x; mask-repeat: repeat-x;
+  -webkit-mask-size: 110px 14px; mask-size: 110px 14px;
+  -webkit-mask-position: 0 bottom; mask-position: 0 bottom;
+  animation: gtg-wave 2.8s linear infinite;
+}
+@keyframes gtg-wave {
+  from { -webkit-mask-position: 0 bottom;     mask-position: 0 bottom; }
+  to   { -webkit-mask-position: 110px bottom; mask-position: 110px bottom; }
+}
+.level-shape__outline {
+  position: absolute; inset: 0;
+  background: var(--shape-outline) center / contain no-repeat;
+  pointer-events: none;
+}
+
+/* ===================================================================
+   LEVEL BOX — three category level-shapes, each with a label above and
+   a big level number overlapping the bottom-left (Profile screen)
+   =================================================================== */
+.level-box {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-16);
+  width: 100%;
+  padding: var(--space-16);
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+.level-stat { display: flex; flex-direction: column; align-items: center; gap: var(--space-8); min-width: 0; }
+.level-stat__label { font-family: var(--font-body); font-size: 18px; font-weight: 800; line-height: 24px; color: var(--color-border); }
+.level-stat__shape { position: relative; width: 100%; max-width: 88px; }
+.level-stat__shape .level-shape { width: 100%; }
+/* big level number — "Profile Numbers" type (48px display), bottom-left */
+.level-stat__num {
+  position: absolute; left: -2px; bottom: -4px; z-index: 2;
+  font-family: var(--font-display); font-size: 48px; font-weight: 800;
+  line-height: 38px; letter-spacing: var(--tracking-title);
+  color: var(--color-border); pointer-events: none;
+}
+
+/* ===================================================================
+   ATTENTION MESSAGE  (speech bubble + optional "!" badge)
+   small: max 240px, Small Text centered, 40px badge
+   big:   full width, Headline small, 56px badge, optional 2 buttons
+   =================================================================== */
+.attention {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 240px;
+  padding: 12px 24px 12px 16px;
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  border-radius: 24px;
+  box-shadow: var(--shadow-card);
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 12px; font-weight: 500; line-height: 16px;
+}
+.attention__badge {
+  position: absolute;
+  right: -16px; top: -16px;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  box-shadow: 2px 2px 0 0 var(--color-border);
+  animation: gtg-badge-pop .4s cubic-bezier(.34,1.56,.64,1) both;
+}
+.attention__badge img { width: 24px; height: 24px; }
+@keyframes gtg-badge-pop { from { transform: scale(0); } to { transform: scale(1); } }
+
+.attention--big {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-16);
+  width: 100%;
+  max-width: none;
+  padding: 32px 24px;
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: 24px; font-weight: 700; line-height: 26px;
+}
+.attention--big .attention__badge { right: -10.5px; top: -14px; width: 56px; height: 56px; border-radius: 50%; }
+.attention__buttons { display: flex; gap: var(--space-16); width: 100%; }
+.attention__buttons > .btn { flex: 1; padding-left: 16px; padding-right: 16px; }
+
+/* ===================================================================
+   PROFILE CARD  (avatar overlaps top, name/title, collapsible totals)
+   =================================================================== */
+.profile-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  margin-top: 48px;                    /* room for overlapping avatar */
+  padding: 64px 16px 16px;
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  border-radius: 24px;
+  box-shadow: var(--shadow-card);
+}
+.profile-card__avatar {
+  position: absolute;
+  top: -48px; left: 50%;
+  transform: translateX(-50%);
+  width: 96px; height: 96px;
+  border: 2px solid var(--color-border);   /* outline around the circle */
+  border-radius: 50%;
+  background: var(--color-border);          /* fills the hairline so there's no gap between border and image */
+  box-shadow: 4px 4px 0 1px var(--color-border);   /* +1px spread closes the seam between the border and the shadow */
+  overflow: hidden;                 /* clip the photo / placeholder to the circle */
+}
+.profile-card__avatar img,
+.profile-card__avatar .img-placeholder { width: 100%; height: 100%; display: block; transform: scale(1.03); }   /* slight overscan so the image meets the border (pic SVGs sit ~1% inside their box) */
+.profile-card__name { text-align: center; font-family: var(--font-body); font-size: 18px; font-weight: 800; line-height: 24px; }
+.profile-card__title { text-align: center; font-family: var(--font-body); font-size: 12px; font-weight: 500; line-height: 16px; }
+.profile-card__line { height: 1px; margin: 16px 0; background: var(--color-border); }
+/* totals + per-category rows share one grid so every number lines up in one
+   centred column, with the chevron pinned right (matches the design) */
+.profile-card__totals,
+.profile-card__cat {
+  display: grid;
+  grid-template-columns: 124px 1fr 24px;   /* label | number column | chevron */
+  align-items: center;
+  gap: var(--space-16);
+}
+.profile-card__totals { cursor: pointer; }
+.profile-card__totals-num,
+.profile-card__cat-num { text-align: center; font-family: var(--font-body); font-weight: 800; }
+.profile-card__chevron { width: 24px; height: 24px; justify-self: end; transform: rotate(-90deg); transition: transform .3s ease; }
+.profile-card.is-open .profile-card__chevron { transform: rotate(90deg); }
+/* collapsible detail (grid-rows trick → smooth height) */
+.profile-card__detail { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s ease; }
+.profile-card.is-open .profile-card__detail { grid-template-rows: 1fr; }
+.profile-card__detail-inner { overflow: hidden; }
+.profile-card__cat { padding-top: 16px; }   /* empty 3rd column keeps numbers aligned under the total */
+
+/* ===================================================================
+   QUEST CARD (Select) — colored, shape + description + subcategory tag
+   =================================================================== */
+.quest-list { display: flex; flex-direction: column; gap: var(--space-24); width: 100%; }
+.quest-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  width: 100%;
+  padding: 24px 16px;
+  color: var(--color-border);                 /* drives every "border black" element */
+  background: var(--cat, var(--color-indoor));
+  border: 2px solid currentColor;
+  border-radius: 24px;
+  box-shadow: 4px 4px 0 0 currentColor;
+  cursor: pointer;
+  transition: transform .08s ease, box-shadow .15s ease, background-color .15s ease, color .15s ease;
+}
+.quest-card__shape {
+  flex: none; width: 64px; height: 64px;
+  background-color: currentColor;             /* recolours with the card */
+  -webkit-mask: var(--quest-shape) center / contain no-repeat;
+          mask: var(--quest-shape) center / contain no-repeat;
+}
+.quest-card__desc {
+  flex: 1; margin: 0;
+  font-family: var(--font-body); font-size: 18px; font-weight: 500; line-height: 24px;
+}
+.quest-card__tag {
+  position: absolute; top: -16px; right: 0; z-index: 2;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 112px; min-height: 32px;
+  padding: 8px 16px;
+  background: var(--cat, var(--color-indoor));
+  border: 2px solid currentColor;
+  border-radius: 24px;
+  box-shadow: 4px 4px 0 0 currentColor;
+  font-family: var(--font-body); font-size: 12px; font-weight: 500; line-height: 16px;
+  white-space: nowrap;
+}
+/* selected (pressed) / blocked → every "border black" element becomes "border black active" */
+.quest-card:active,
+.quest-card.is-blocked { color: var(--color-border-active); background: var(--cat-active); }
+.quest-card:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 0 currentColor; }
+.quest-card.is-blocked { cursor: default; }
+.quest-card:active .quest-card__tag,
+.quest-card.is-selected .quest-card__tag,
+.quest-card.is-blocked .quest-card__tag { background: var(--cat-active); }
+
+/* quest shape masks (outline silhouettes, recoloured via currentColor) */
+.qs-tasks   { --quest-shape: url("../assets/svg/shapes/tasks_outline.svg"); }
+.qs-outside { --quest-shape: url("../assets/svg/shapes/outside_outline.svg"); }
+.qs-social  { --quest-shape: url("../assets/svg/shapes/social_outline.svg"); }
+
+/* ===================================================================
+   PHOTO CONTAINERS  (wide ≈1:1 / long 3:4) + Quest Overview + Gallery
+   =================================================================== */
+.photo {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-bg-active);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+.photo--wide { aspect-ratio: 87 / 86; }
+.photo--long { aspect-ratio: 3 / 4; }
+.photo img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Quest overview = quest card body + photo (+ optional date) */
+.quest-overview {
+  position: relative;
+  display: flex; flex-direction: column; gap: var(--space-16);
+  width: 100%;
+  padding: 24px 16px 16px;
+  background: var(--cat, var(--color-indoor));
+  border: 2px solid var(--color-border);
+  border-radius: 24px;
+  box-shadow: var(--shadow-card);
+}
+.quest-overview__head { display: flex; align-items: center; gap: var(--space-16); }
+.quest-overview__date { text-align: center; font-family: var(--font-body); font-size: 12px; font-weight: 500; line-height: 16px; }
+
+/* Gallery card — 2-row grid: photo (1:1) + small description */
+.gallery-card {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: var(--space-8);
+  padding: var(--space-8);
+  color: var(--color-border);                  /* drives border / shadow / text */
+  background: var(--cat, var(--color-indoor));
+  border: 2px solid currentColor;
+  border-radius: 16px;
+  box-shadow: 4px 4px 0 0 currentColor;
+  cursor: pointer;
+  transition: transform .08s ease, box-shadow .15s ease, background-color .15s ease, color .15s ease;
+}
+.gallery-card__photo { width: 100%; aspect-ratio: 1 / 1; border: 1px solid currentColor; border-radius: 8px; overflow: hidden; background: var(--color-bg-active); }
+.gallery-card__photo img { width: 100%; height: 100%; object-fit: cover; }
+.gallery-card__desc { font-family: var(--font-body); font-size: 12px; font-weight: 500; line-height: 16px; padding: 0 4px 4px; }
+/* selected → every "border black" element becomes "border black active" */
+.gallery-card:active,
+.gallery-card.is-selected { color: var(--color-border-active); background: var(--cat-active); }
+.gallery-card:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 0 currentColor; }
+.gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); width: 100%; }
+/* a freshly completed quest pops into the gallery */
+.gallery-card--new { animation: gtg-gallery-in .5s cubic-bezier(.34, 1.56, .64, 1) backwards; }
+@keyframes gtg-gallery-in { from { opacity: 0; transform: scale(.7); } to { opacity: 1; transform: none; } }
+/* an archived quest swipes away to the side */
+.gallery-card--archiving { animation: gtg-gallery-archive .75s cubic-bezier(.4, 0, .2, 1) forwards; pointer-events: none; }
+@keyframes gtg-gallery-archive { to { opacity: 0; transform: translateX(120%) rotate(4deg); } }
+
+/* ===================================================================
+   HEADER  (back arrow + Headline Caps + optional icon button)
+   =================================================================== */
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  width: 100%;
+  padding: 16px 0;
+}
+.header__title {
+  flex: 1;
+  min-width: 0;                 /* allow the title to shrink/wrap so the trailing button never gets cut off */
+  overflow-wrap: break-word;
+  font-family: var(--font-display);
+  font-size: var(--font-headline); font-weight: 800; line-height: 0.95em;   /* responsive: fits the width on small screens */
+  text-transform: uppercase;
+}
+.header__title--right { text-align: left; }
+
+/* ===================================================================
+   BOTTOM BAR  (4 interlocking segments: black = active, white = inactive)
+   Left = quests, right = profile; the two overlap at the S-curve.
+   Switching crossfades each side's active/inactive shape + pops the icon.
+   =================================================================== */
+.bottom-bar-wrap { width: 100%; }
+.bottom-bar-wrap--scroll {
+  padding-top: 40px;
+  background: linear-gradient(180deg, rgba(250,243,229,0) 0%, var(--color-bg) 54.33%);
+}
+.bottom-bar {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 380 / 57;
+}
+.bottom-bar__seg { position: absolute; top: 0; height: 100%; width: 57.5%; }
+.bottom-bar__seg--left { left: 0; }
+.bottom-bar__seg--right { right: 0; }
+.bottom-bar__fill {
+  position: absolute; inset: 0;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+/* cream (inactive) segments are the always-visible base */
+.bottom-bar__seg--left  .bottom-bar__fill--inactive { background-image: url("../assets/svg/bottombar_quest_inactive.svg"); }
+.bottom-bar__seg--right .bottom-bar__fill--inactive { background-image: url("../assets/svg/bottombar_profile_inactive.svg"); }
+/* dark (active) segments sit on top and MORPH across the centre by squashing
+   (transform-origin on the inner edge; linear timing — no easing) */
+.bottom-bar__seg--left  .bottom-bar__fill--active {
+  background-image: url("../assets/svg/bottombar_quest_active.svg");
+  transform-origin: right center;
+}
+.bottom-bar__seg--right .bottom-bar__fill--active {
+  background-image: url("../assets/svg/bottombar_profile_active.svg");
+  transform-origin: left center;
+}
+.bottom-bar__fill--active { transform: scaleX(0); transition: transform .2s linear; }
+.bottom-bar[data-active="quests"]  .bottom-bar__seg--left  .bottom-bar__fill--active,
+.bottom-bar[data-active="profile"] .bottom-bar__seg--right .bottom-bar__fill--active { transform: scaleX(1); }
+
+.bottom-bar__tab {
+  position: absolute; top: 0; height: 100%; width: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: none; border: 0; cursor: pointer; padding: 0;
+}
+.bottom-bar__tab--quests { left: 0; }
+.bottom-bar__tab--profile { right: 0; }
+.bottom-bar__tab .bb-ic { position: relative; width: 24px; height: 24px; }
+.bottom-bar__tab.is-popping .bb-ic { animation: gtg-pop .25s linear; }
+@keyframes gtg-pop { 0% { transform: scale(1); } 50% { transform: scale(1.22); } 100% { transform: scale(1); } }
+.bottom-bar__tab .ic { position: absolute; inset: 0; width: 24px; height: 24px; display: block; transition: opacity .18s linear; }
+.bottom-bar__tab .ic--white { opacity: 0; }
+/* active tab → white icon, inactive → black icon */
+.bottom-bar[data-active="quests"]  .bottom-bar__tab--quests  .ic--white,
+.bottom-bar[data-active="profile"] .bottom-bar__tab--profile .ic--white { opacity: 1; }
+.bottom-bar[data-active="quests"]  .bottom-bar__tab--quests  .ic--black,
+.bottom-bar[data-active="profile"] .bottom-bar__tab--profile .ic--black { opacity: 0; }
+
+/* ---------- generic image placeholder (gray mountain) ---------- */
+.img-placeholder {
+  width: 100%; height: 100%;
+  background:
+    radial-gradient(circle at 26% 38%, #ECECEC 0 9%, transparent 10%),
+    linear-gradient(135deg, #E6E6E6, #D8D8D8);
+  display: block;
+}
+
+/* ===================================================================
+   LOADING ANIMATION — 3 category shapes cycling through their
+   subcategory variants (the "choosing today's sidequests" picker)
+   =================================================================== */
+.loading-shapes { display: flex; align-items: center; justify-content: center; gap: var(--space-24); }
+.loading-shape {
+  width: 88px; aspect-ratio: 1 / 1; flex: none;
+}
+.loading-shape img {
+  width: 100%; height: 100%; display: block;
+  animation: gtg-shape-in .28s ease;
+}
+@keyframes gtg-shape-in { from { opacity: .25; transform: scale(.82) rotate(-10deg); } to { opacity: 1; transform: none; } }

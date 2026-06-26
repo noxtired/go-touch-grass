@@ -1,0 +1,13 @@
+/* ============================================================
+   Go Touch Grass — Design system entry point
+   Link THIS single file from any screen:
+       <link rel="stylesheet" href="css/design-system.css">
+   Import order matters: fonts + tokens must load before the
+   rules that consume them.
+   ============================================================ */
+
+@import "fonts.css";
+@import "tokens.css";
+@import "base.css";
+@import "typography.css";
+@import "components.css";
