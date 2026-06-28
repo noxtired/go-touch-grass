@@ -4,4 +4,18 @@ Thumbs.db
 desktop.ini
 
 # Local Claude Code settings (machine-specific)
-.claude/settings.local.json
+.claude/
+
+# Design assets and reference files (local only — not deployed)
+Design/
+SVGs/
+_pdf_pages/
+_refs/
+_tools/
+fonts/
+screens/
+*.pdf
+*.ai
+*.indd
+*.xlsx
+component-set-up.txt
