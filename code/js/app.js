@@ -283,6 +283,7 @@
   function startCamera() {
     stopCamera();
     setHint("");
+    video.classList.toggle("is-mirrored", cam.facing === "user");
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { setHint("Camera not available — upload a photo instead."); return; }
     navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: cam.facing } }, audio: false })
       .then(function (stream) {

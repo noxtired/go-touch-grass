@@ -140,6 +140,7 @@ body { overflow: hidden; }
   display: block;
   background: #cfcabd;
 }
+.camera__video.is-mirrored { transform: scaleX(-1); }
 .camera__upload { position: absolute; top: var(--space-16); right: var(--space-16); z-index: 3; }
 .camera__controls {
   position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
